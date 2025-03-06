@@ -2,7 +2,7 @@ import Image from "next/image";
 import { allImages } from "@/public/images/images";
 import Button from "@/components/ui/Button";
 import React from "react";
-import { faqData } from "@/utils/constant";
+import { faqData, howData } from "@/utils/constant";
 import Accordion from "@/components/main/faqElements/Accordion";
 import DonationCountDown from "@/components/main/DonationCountDown";
 import WhyStudy from "@/components/main/WhyStudy";
@@ -145,13 +145,61 @@ export default function Home() {
 
       <WhyStudy />
 
-      <section id="faqs" className="bg-Grey2 container rounded-3xl py-10">
+      <section id="faqs" className="my-10 rounded-3xl bg-[#FBFBFB] py-10">
+        <article className="mb-8 text-center">
+          <h3>How It Works</h3>
+        </article>
+        <article className="container flex flex-wrap justify-between gap-10">
+          <ul className="flex-1 space-y-6">
+            {howData.map(({ title, subtitle }, idx) => (
+              <li
+                key={idx}
+                className="shadow-3xl hover:shadow-4xl flex gap-4 rounded-2xl bg-[#ffffff4e] px-4 py-5 text-xl font-semibold text-black transition-all duration-500 ease-in-out hover:bg-white lg:text-2xl"
+              >
+                <span className="text-secondary">0{idx + 1}</span>
+                <article>
+                  <span>{title}</span>
+                  <p className="!mt-1 !text-base">{subtitle}</p>
+                </article>
+              </li>
+            ))}
+          </ul>
+
+          <figure className="w-full lg:w-6/12">
+            <Image src={allImages.how} alt="" />
+          </figure>
+        </article>
+      </section>
+
+      <section id="faqs" className="bg-Grey2 container mt-20 rounded-3xl py-10">
         <article className="text-center">
           <h3>Frequently Asked Questions</h3>
         </article>
 
         <article className="mx-auto mt-8 w-full lg:w-9/12">
           <Accordion data={faqData} />
+        </article>
+      </section>
+
+      <section
+        data-aos="fade-down"
+        data-aos-duration="1000"
+        className="bg-primary container my-20 rounded-3xl py-20"
+      >
+        <article className="mx-auto flex w-11/12 max-w-[744px] flex-col items-center gap-3 text-center text-white">
+          <h3>Join Early & Get Exclusive Perks</h3>
+
+          <p className="text-lg">
+            Be among our early supporters and enjoy bonus entries, VIP community
+            access, and exclusive insights into how StudyFund is reshaping
+            educational funding.
+          </p>
+        </article>
+
+        <article className="mx-auto mt-7 flex w-11/12 max-w-[400px] flex-col items-center justify-between">
+          <Button className="pry-btn !text-primary w-fit !bg-white">
+            Donate Now & Win Huge Rewards!
+          </Button>
         </article>
       </section>
     </main>

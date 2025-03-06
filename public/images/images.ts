@@ -17,9 +17,11 @@ import swhya from "@/public/images/swhya.png";
 import swhya1 from "@/public/images/swhya1.png";
 import swhyb from "@/public/images/swhyb.png";
 import swhyb2 from "@/public/images/swhyb2.png";
+import how from "@/public/images/how.png";
 
 export const allImages = {
   brandLogo,
+  how,
   card,
   card2,
   card3,

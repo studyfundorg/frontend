@@ -83,7 +83,7 @@ const WhyStudy = () => {
   ];
 
   return (
-    <section className="container flex flex-col gap-4 py-20">
+    <section className="container flex flex-col gap-10 py-20">
       <article
         data-aos="fade-down"
         data-aos-duration="1000"
@@ -98,7 +98,7 @@ const WhyStudy = () => {
         </p>
       </article>
 
-      <ul className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+      <ul className="grid grid-cols-1 gap-4 gap-y-7 lg:grid-cols-4">
         {whyData.map(({ title, subtitle, animation }, idx) => (
           <li
             key={idx}
@@ -108,7 +108,7 @@ const WhyStudy = () => {
 
             <article>
               <span>{title}</span>
-              <p className="!mt-3">{subtitle}</p>
+              <p className="!mt-3 !text-base">{subtitle}</p>
             </article>
           </li>
         ))}

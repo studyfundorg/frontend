@@ -15,7 +15,7 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
         className={`${toggle["navbar"] ? styles.closeNav : styles.openNav} w-full`}
       >
         <article
-          className={`flex w-full flex-wrap justify-between bg-white py-5`}
+          className={`flex w-full flex-wrap justify-between bg-white py-5 lg:bg-transparent`}
         >
           <ul
             className={`flex flex-1 flex-col items-start justify-start gap-4 lg:flex-row lg:items-center lg:justify-center`}

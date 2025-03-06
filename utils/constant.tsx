@@ -30,3 +30,27 @@ export const faqData = [
       "Our numbers come from major US phone companies. We guarantee you can verify any service, even those that don't accept virtual numbers such as Google.",
   },
 ];
+
+export const howData = [
+  {
+    title: "Donate at least 10 USDT",
+    subtitle: "each contribution earns you a raffle ticket.",
+  },
+  {
+    title: "Get Entered",
+    subtitle: "into a transparent blockchain-verified raffle.",
+  },
+  {
+    title: "Win Big!",
+    subtitle:
+      "every round, five winners and five runners-up receive huge cash prizes.",
+  },
+  {
+    title: "Empower Students",
+    subtitle: "scholarships are funded directly via smart contracts.",
+  },
+  {
+    title: "Track Your Impact",
+    subtitle: "see exactly how your donations are used.",
+  },
+];
