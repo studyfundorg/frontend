@@ -1,35 +1,51 @@
 import { allImages } from "@/public/images/images";
 
-export const faqData = [
+export const studentFaqData = [
   {
     id: 1,
-    question: "Is StudyFund trustworthy?",
-    answer:
-      "Our numbers come from major US phone companies. We guarantee you can verify any service, even those that don't accept virtual numbers such as Google.",
+    question: "Who is eligible?",
+    answer: "University students with 70%+ grades.",
   },
   {
     id: 2,
-    question: "What happens if the donation target isn’t met?",
-    answer:
-      "Our numbers come from major US phone companies. We guarantee you can verify any service, even those that don't accept virtual numbers such as Google.",
+    question: "How do I verify my grades?",
+    answer: "Your school must send your transcript directly to us.",
   },
   {
     id: 3,
-    question: "Who can apply for scholarships?",
-    answer:
-      "Our numbers come from major US phone companies. We guarantee you can verify any service, even those that don't accept virtual numbers such as Google.",
+    question: "What is OCID?",
+    answer: "Your Web3 education identity on OpenCampus.",
   },
   {
     id: 4,
-    question: "How do I track my donation’s impact?",
+    question: "What is the Proof of Excellence NFT?",
     answer:
-      "Our numbers come from major US phone companies. We guarantee you can verify any service, even those that don't accept virtual numbers such as Google.",
+      "A blockchain-verified credential visible to employers & institutions.",
   },
   {
     id: 5,
-    question: "How does the raffle work?",
+    question: "What happens if my grades drop?",
     answer:
-      "Our numbers come from major US phone companies. We guarantee you can verify any service, even those that don't accept virtual numbers such as Google.",
+      "You must maintain academic excellence to continue receiving support.",
+  },
+];
+
+export const faqData = [
+  {
+    id: 1,
+    question: "How do I know my donation is helping students?",
+    answer:
+      "We provide transparency through impact reports & success tracking.",
+  },
+  {
+    id: 2,
+    question: "How are winners selected?",
+    answer: "All entries are fairly randomized and verified.",
+  },
+  {
+    id: 3,
+    question: "What kind of prizes can I win?",
+    answer: "USDT cash prizes, multipliers, and cash bonuses!",
   },
 ];
 

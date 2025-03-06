@@ -2,7 +2,7 @@ import Image from "next/image";
 import { allImages } from "@/public/images/images";
 import Button from "@/components/ui/Button";
 import React from "react";
-import { faqData, whyStudentData } from "@/utils/constant";
+import { faqData, studentFaqData, whyStudentData } from "@/utils/constant";
 import Accordion from "@/components/main/faqElements/Accordion";
 import { AnimatedImages } from "@/components/main/WhyStudy";
 
@@ -268,7 +268,7 @@ export default function page() {
         </article>
 
         <article className="mx-auto mt-8 w-full lg:w-9/12">
-          <Accordion data={faqData} bg="bg-[#FBFBFB]" />
+          <Accordion data={studentFaqData} bg="bg-[#FBFBFB]" />
         </article>
       </section>
 
