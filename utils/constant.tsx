@@ -1,3 +1,5 @@
+import { allImages } from "@/public/images/images";
+
 export const faqData = [
   {
     id: 1,
@@ -52,5 +54,23 @@ export const howData = [
   {
     title: "Track Your Impact",
     subtitle: "see exactly how your donations are used.",
+  },
+];
+
+export const whyStudentData = [
+  {
+    title: "Tuition Support",
+    subtitle: "Reduce your student loan burden with StudyFund grants.",
+    imgUrl: allImages.tutIcon,
+  },
+  {
+    title: "Bursary Assistance",
+    subtitle: "Cover essential living expenses and study materials.",
+    imgUrl: allImages.busIcon,
+  },
+  {
+    title: "Exclusive Resources",
+    subtitle: "Access career mentorship, learning tools, and more.",
+    imgUrl: allImages.exIcon,
   },
 ];

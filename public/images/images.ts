@@ -18,9 +18,15 @@ import swhya1 from "@/public/images/swhya1.png";
 import swhyb from "@/public/images/swhyb.png";
 import swhyb2 from "@/public/images/swhyb2.png";
 import how from "@/public/images/how.png";
+import whyStudent from "@/public/images/whyStudent.png";
+import busIcon from "@/public/images/busIcon.png";
+import exIcon from "@/public/images/exIcon.png";
+import tutIcon from "@/public/images/tutIcon.png";
+import studyFund from "@/public/images/StudyFund.png";
 
 export const allImages = {
   brandLogo,
+  studyFund,
   how,
   card,
   card2,
@@ -40,4 +46,8 @@ export const allImages = {
   swhya,
   swhyb,
   swhyb2,
+  whyStudent,
+  busIcon,
+  exIcon,
+  tutIcon,
 };

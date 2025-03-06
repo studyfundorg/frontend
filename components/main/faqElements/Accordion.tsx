@@ -1,12 +1,6 @@
 "use client";
 import { useState } from "react";
-import {
-  FaArrowDown,
-  FaArrowLeft,
-  FaArrowRight,
-  FaChevronDown,
-  FaChevronUp,
-} from "react-icons/fa6";
+import { FaArrowDown, FaArrowRight } from "react-icons/fa6";
 
 const Accordion = ({
   data,

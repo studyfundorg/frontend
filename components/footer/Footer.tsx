@@ -1,10 +1,15 @@
+"use client";
 import React from "react";
 import BrandLogo from "../BrandLogo";
 import { navbarRoutes, tersmRoutes } from "../routes";
 import Link from "next/link";
 import Button from "../ui/Button";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const path = usePathname();
+
+  const isForStudent = path.includes("/for-students");
   return (
     <footer className="bg-[#021126] py-10">
       <section className="container flex flex-wrap justify-between gap-y-6">
@@ -16,7 +21,7 @@ const Footer = () => {
           </ul>
 
           <ul className="flex flex-wrap gap-16">
-            {navbarRoutes.map(({ name, path }) => (
+            {navbarRoutes(isForStudent).map(({ name, path }) => (
               <li key={name}>
                 <Link href={path} className="text-base font-medium !text-white">
                   {" "}

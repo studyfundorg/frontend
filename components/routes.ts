@@ -1,22 +1,24 @@
-export const navbarRoutes = [
-  {
-    name: "Leaderboard",
-    path: "#leaderboard",
-  },
-  {
-    name: "How it works",
-    path: "#how-it-works",
-  },
+export const navbarRoutes = (student?: boolean) => {
+  return [
+    {
+      name: "Leaderboard",
+      path: "/#leaderboard",
+    },
+    {
+      name: "How it works",
+      path: "#how-it-works",
+    },
 
-  {
-    name: "FAQ",
-    path: "#faqs",
-  },
-  {
-    name: "For students",
-    path: "/for-students",
-  },
-];
+    {
+      name: "FAQ",
+      path: "#faqs",
+    },
+    {
+      name: student ? "For Donors" : "For students",
+      path: student ? "/" : "/for-students",
+    },
+  ];
+};
 
 export const footerRoutes = [
   {

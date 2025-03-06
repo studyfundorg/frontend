@@ -9,7 +9,7 @@ import WhyStudy from "@/components/main/WhyStudy";
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden pt-20">
       <section className="homeHero flex min-h-screen flex-col justify-between gap-y-7 overflow-hidden pt-20">
         <article
           data-aos="fade-down"

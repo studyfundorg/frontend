@@ -5,9 +5,14 @@ import Hambugger from "./Hambugger";
 import { navbarRoutes } from "../routes";
 import { useGlobalHooks } from "@/hooks/globalHooks";
 import Button from "../ui/Button";
+import { usePathname } from "next/navigation";
 
 const ResponsiveNavBar = ({ styles }: { styles: any }) => {
   const { handleToggle, toggle } = useGlobalHooks();
+
+  const path = usePathname();
+
+  const isForStudent = path.includes("/for-students");
 
   return (
     <nav className="flex flex-1 justify-end">
@@ -20,7 +25,7 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
           <ul
             className={`flex flex-1 flex-col items-start justify-start gap-4 lg:flex-row lg:items-center lg:justify-center`}
           >
-            {navbarRoutes.map((route, index) => (
+            {navbarRoutes(isForStudent).map((route, index) => (
               <NavbarLink
                 key={index}
                 path={route.path}
@@ -31,17 +36,25 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
           </ul>
 
           <div className="w-full px-2 lg:w-fit lg:px-0">
-            <Button className="pry-btn w-full" type="button">
-              Join studyfund now
-            </Button>
+            {isForStudent ? (
+              <Button className="pry-btn w-full" type="button">
+                Apply today
+              </Button>
+            ) : (
+              <Button className="pry-btn w-full" type="button">
+                Join studyfund now
+              </Button>
+            )}
           </div>
         </article>
       </section>
-      <Hambugger
-        styles={styles}
-        action={() => handleToggle("navbar")}
-        toggle={toggle["navbar"]}
-      />
+      <div className="w-3/12 md:w-1/12">
+        <Hambugger
+          styles={styles}
+          action={() => handleToggle("navbar")}
+          toggle={toggle["navbar"]}
+        />
+      </div>
     </nav>
   );
 };
