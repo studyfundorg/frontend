@@ -1,7 +1,12 @@
 "use client";
 import { useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
-import { FiHelpCircle } from "react-icons/fi";
+import {
+  FaArrowDown,
+  FaArrowLeft,
+  FaArrowRight,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa6";
 
 const Accordion = ({
   data,
@@ -17,30 +22,29 @@ const Accordion = ({
   };
 
   return (
-    <ul className="flex flex-wrap justify-between gap-5">
+    <ul className="flex flex-wrap justify-between gap-5 divide-y divide-[#C0C0C0]">
       {data?.map(({ id, question, answer }) => (
         <li
           key={id}
-          className={`w-full cursor-pointer rounded-3xl ${bg ?? "bg-Grey2"} p-7 px-10`}
+          className={`w-full cursor-pointer ${bg ?? "bg-Grey2"} px-2 py-5`}
           onClick={() => handleToggle(id)}
         >
           <div className="flex items-center justify-between">
-            <h5
-              className={`flex items-center gap-3 font-extrabold text-[#334155]`}
-            >
+            <h4 className={`flex items-center gap-3 font-semibold`}>
               {" "}
-              <FiHelpCircle /> {question}
-            </h5>
+              {/* <FiHelpCircle /> */}
+              {question}
+            </h4>
             <span>
               {selected[id] ? (
-                <FaChevronUp color="#94A3B8" />
+                <FaArrowDown color="#000000" />
               ) : (
-                <FaChevronDown color="#94A3B8" />
+                <FaArrowRight color="#000000" />
               )}
             </span>
           </div>
           <div className="mt-2">
-            {selected[id] && <p className="text-sm text-Grey1">{answer}</p>}
+            {selected[id] && <p className="text-Grey1 text-sm">{answer}</p>}
           </div>
         </li>
       ))}

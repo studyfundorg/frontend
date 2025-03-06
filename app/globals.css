@@ -24,6 +24,8 @@
   --color-black: #1e1e1e;
   --color-Grey1: #2d2e30;
   --color-Grey2: #eff5ff;
+  --shadow-3xl: 0px 4px 12px 0px #0000000d;
+  --shadow-4xl: 0px 0px 28px 0px #0000001c;
 }
 
 a {
@@ -59,12 +61,12 @@ h1,
 h2 {
   font-size: 3.5rem;
   line-height: 1.1;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 h3 {
   font-size: 2.25rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 h4 {

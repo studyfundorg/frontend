@@ -5,6 +5,7 @@ import React from "react";
 import { faqData } from "@/utils/constant";
 import Accordion from "@/components/main/faqElements/Accordion";
 import DonationCountDown from "@/components/main/DonationCountDown";
+import WhyStudy from "@/components/main/WhyStudy";
 
 export default function Home() {
   return (
@@ -88,7 +89,7 @@ export default function Home() {
         </article>
       </section>
 
-      <section className="space-y-7 py-28">
+      <section className="flex flex-col gap-4 py-28">
         <article
           data-aos="fade-down"
           data-aos-duration="1000"
@@ -100,35 +101,56 @@ export default function Home() {
             The wait is almost over! Be ready to donate and start winning when
             the funding round begins.
           </p>
-          <p className="!text-2xl !font-bold">Donation begins in</p>
         </article>
 
-        <DonationCountDown />
+        <article className="mt-6">
+          <h4 className="text-center !text-2xl !font-bold">
+            Donation begins in
+          </h4>
+        </article>
 
-        <article
-          data-aos="fade-down"
-          data-aos-duration="1000"
-          className="mx-auto mt-8 flex w-11/12 max-w-[400px] flex-col items-center justify-between"
-        >
+        <article>
+          <DonationCountDown />
+        </article>
+
+        <article className="mx-auto mt-8 flex w-11/12 max-w-[400px] flex-col items-center justify-between">
           <Button className="pry-btn w-fit">Make an Impact. Join now</Button>
         </article>
       </section>
 
-      <section id="faqs" className="my-[60px] py-10">
+      <section
+        id="leaderboard"
+        className="flex flex-col gap-4 bg-[#FBFBFB] pt-10"
+      >
         <article
           data-aos="fade-down"
           data-aos-duration="1000"
-          className="mx-auto flex w-11/12 flex-col items-center gap-4 text-center lg:w-9/12"
+          className="max-w-md space-y-4 pl-7"
         >
-          <button className="small-btn">FAQ</button>
-          <h3>Frequently Asked Questions</h3>
+          <h3 className="">Donation Leaderboard</h3>
 
-          <p className="mx-auto max-w-[800px] text-lg lg:text-xl">
-            Here you can find the most common questions.
+          <p className="">
+            See how you rank among the top contributors and increase your
+            chances of winning!
           </p>
         </article>
 
-        <article className="mx-auto mt-16 w-full lg:w-7/12">
+        <figure className="hidden lg:block">
+          <Image src={allImages.table} alt="" />
+        </figure>
+        <figure className="block lg:hidden">
+          <Image src={allImages.tableM} alt="" />
+        </figure>
+      </section>
+
+      <WhyStudy />
+
+      <section id="faqs" className="bg-Grey2 container rounded-3xl py-10">
+        <article className="text-center">
+          <h3>Frequently Asked Questions</h3>
+        </article>
+
+        <article className="mx-auto mt-8 w-full lg:w-9/12">
           <Accordion data={faqData} />
         </article>
       </section>
