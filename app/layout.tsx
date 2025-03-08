@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
-import Navbar from "@/components/navbar/Navbar";
 import AOSAnimation from "@/utils/AosInit";
-import Footer from "@/components/footer/Footer";
+import NextTopLoader from "nextjs-toploader";
 
 const redditSans = localFont({
   src: [
@@ -45,9 +44,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={redditSans?.variable}>
-        <Navbar />
+        <NextTopLoader showSpinner={false} />
+
         <AOSAnimation>{children}</AOSAnimation>
-        <Footer />
       </body>
     </html>
   );

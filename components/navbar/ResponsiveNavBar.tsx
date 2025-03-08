@@ -37,11 +37,21 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
 
           <div className="w-full px-2 lg:w-fit lg:px-0">
             {isForStudent ? (
-              <Button className="pry-btn w-full" type="button">
+              <Button
+                link
+                href="/signup"
+                className="pry-btn w-full"
+                type="button"
+              >
                 Apply today
               </Button>
             ) : (
-              <Button className="pry-btn w-full" type="button">
+              <Button
+                link
+                href="/signup"
+                className="pry-btn w-full"
+                type="button"
+              >
                 Join studyfund now
               </Button>
             )}

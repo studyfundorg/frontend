@@ -23,6 +23,8 @@ import busIcon from "@/public/images/busIcon.png";
 import exIcon from "@/public/images/exIcon.png";
 import tutIcon from "@/public/images/tutIcon.png";
 import studyFund from "@/public/images/StudyFund.png";
+import privyLogo from "@/public/images/privyLogo.png";
+import edu from "@/public/images/edu.png";
 
 export const allImages = {
   brandLogo,
@@ -50,4 +52,6 @@ export const allImages = {
   busIcon,
   exIcon,
   tutIcon,
+  privyLogo,
+  edu,
 };

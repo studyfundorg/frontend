@@ -20,10 +20,16 @@
   --font-sans: "Reddit Sans", "san-serif";
   --color-primary: #085bcf;
   --color-secondary: #86b8ff;
+  --color-ebonyclay: #1d2939;
   --color-white: #fff;
   --color-black: #1e1e1e;
   --color-Grey1: #2d2e30;
   --color-Grey2: #eff5ff;
+  --color-Grey3: #667085;
+  --color-Grey4: #eff2f6;
+  --color-Grey5: #f9fafb;
+  --color-Grey6: #f2f4f7;
+  --color-Grey7: #868a90;
   --shadow-3xl: 0px 4px 12px 0px #0000000d;
   --shadow-4xl: 0px 0px 28px 0px #0000001c;
 }
@@ -84,6 +90,11 @@ em {
   font-size: inherit;
 }
 
+.card {
+  border: solid 1px #e4e7ec;
+  border-radius: 8px;
+}
+
 .zoomImg {
   transition: transform 0.4s ease-in-out;
 }
@@ -101,10 +112,33 @@ em {
   font-weight: bold;
 }
 
+.navlinkActive,
+.navlinkNotActive,
 .navbarActive,
 .navbarNotActive {
   padding: 0.6em 1em;
   font-size: 14px;
+}
+
+.navlinkActive,
+.navlinkNotActive {
+  border-radius: 999px;
+  border: solid 1px var(--color-Grey6);
+  background: var(--color-Grey5);
+  min-height: 48px;
+  padding: 8px 18px;
+  display: flex;
+  gap: 0.6em;
+  justify-content: center;
+  align-items: center;
+}
+
+.navlinkActive {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.navlinkActive [stroke] {
+  stroke: var(--color-white);
 }
 
 .navbarNotActive {
@@ -121,9 +155,9 @@ em {
   padding: 12px 32px;
   font-size: 1rem;
   font-weight: 500;
-  display: grid;
-  place-items: center;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.4em;
   border-radius: 90px;
   letter-spacing: 0.112px;
