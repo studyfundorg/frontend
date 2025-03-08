@@ -2,8 +2,6 @@
 import React from "react";
 
 import { useGlobalHooks } from "@/hooks/globalHooks";
-import { usePathname } from "next/navigation";
-import NavbarLink from "@/components/navbar/NavbarLink";
 import Button from "@/components/ui/Button";
 import { HistoryIcon, LeaderIcon, ReferralIcon } from "@/public/svgs/svgs";
 import Hambugger from "@/components/navbar/Hambugger";
@@ -31,10 +29,6 @@ export const dashboardRoutes = [
 
 const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
   const { handleToggle, toggle } = useGlobalHooks();
-
-  const path = usePathname();
-
-  const isForStudent = path.includes("/for-students");
 
   return (
     <nav className="flex flex-1 justify-end">
