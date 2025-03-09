@@ -281,8 +281,8 @@ export const BronzTrophyIcon = (props: SVGProps<SVGSVGElement>) => (
 export const USDTIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={24}
-    height={24}
+    width="24"
+    height="24"
     viewBox="0 0 40 40"
     fill="none"
     {...props}

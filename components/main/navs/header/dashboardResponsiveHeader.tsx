@@ -54,7 +54,12 @@ const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
 
           <div className="flex w-full flex-wrap px-2 lg:w-fit lg:px-0">
             <div className="w-full lg:w-fit">
-              <Button className="pry-btn w-full gap-3" type="button">
+              <Button
+                link
+                href="/donate"
+                className="pry-btn w-full gap-3"
+                type="button"
+              >
                 <FaPlus /> Donate
               </Button>
             </div>

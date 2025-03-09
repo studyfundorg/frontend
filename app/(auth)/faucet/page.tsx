@@ -1,10 +1,10 @@
 import BrandLogo from "@/components/BrandLogo";
+import Warning from "@/components/main/warning";
 import Button from "@/components/ui/Button";
 import { allImages } from "@/public/images/images";
 import { USDTIcon } from "@/public/svgs/svgs";
 import Image from "next/image";
 import React from "react";
-import { MdErrorOutline } from "react-icons/md";
 
 export default function page() {
   return (
@@ -15,20 +15,18 @@ export default function page() {
         </div>
         <article className="card !rounded-2xl p-5">
           <h4>Welcome</h4>
-
-          <article className="mt-10 flex gap-2 rounded-2xl bg-[#FFFDEF] px-6 py-4">
-            <MdErrorOutline color="#FFB000" size={20} />{" "}
-            <p className="text-start">
-              We noticed you do not have EDU token and USDT to test
-            </p>
-          </article>
+          <Warning
+            title=" We noticed you do not have EDU token and USDT to test"
+            className="mt-10"
+          />
 
           <form action="" className="mt-4 flex flex-wrap gap-4">
-            <article className="card flex flex-1 justify-between p-3">
+            <article className="card inputWrapper flex justify-between p-3">
               <input
                 type="tel"
                 placeholder="0.0"
-                className="flex-1 border-0 focus:outline-0"
+                className="w-6/12 !border-0 focus:!outline-0"
+                required
               />
 
               <div className="flex items-center justify-end gap-2">
@@ -36,34 +34,39 @@ export default function page() {
                 <span> EDU</span>
               </div>
             </article>
-            <article className="card flex flex-1 justify-between p-4">
-              <div className="flex-1">
-                <input
-                  type="tel"
-                  placeholder="0.0"
-                  className="border-0 focus:outline-0"
-                />
-              </div>
+            <article className="card inputWrapper flex justify-between p-4">
+              <input
+                type="tel"
+                placeholder="0.0"
+                className="w-6/12 !border-0 focus:!outline-0"
+                required
+              />
+
               <div className="flex flex-1 items-center justify-end gap-2">
                 <USDTIcon /> <span> USDT</span>
               </div>
             </article>
 
             <article className="w-full">
-              <p className="text-ebonyclay !tex-sm text-start !font-medium">
+              <p className="text-ebonyclay text-start !text-sm !font-medium">
                 Wallet address
               </p>
               <div className="card mt-3 flex justify-between p-4">
-                <p className="text-ebonyclay !tex-sm text-start !font-medium">
+                <p className="text-ebonyclay text-start !text-sm !font-medium">
                   0x3445678897654345678907654tygu8765
                 </p>
               </div>
             </article>
-          </form>
 
-          <Button className="pry-btn mt-10 mb-3 w-full gap-4">
-            Claim tokens
-          </Button>
+            <Button
+              link
+              href="/donate"
+              className="pry-btn mt-2 w-full gap-4"
+              type="submit"
+            >
+              Claim tokens
+            </Button>
+          </form>
         </article>
       </section>
     </main>

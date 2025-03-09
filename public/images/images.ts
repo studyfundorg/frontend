@@ -25,6 +25,7 @@ import tutIcon from "@/public/images/tutIcon.png";
 import studyFund from "@/public/images/StudyFund.png";
 import privyLogo from "@/public/images/privyLogo.png";
 import edu from "@/public/images/edu.png";
+import donateHeroImg from "@/public/images/donateHeroImg.png";
 
 export const allImages = {
   brandLogo,
@@ -54,4 +55,5 @@ export const allImages = {
   tutIcon,
   privyLogo,
   edu,
+  donateHeroImg,
 };

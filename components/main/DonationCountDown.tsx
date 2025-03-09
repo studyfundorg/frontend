@@ -1,46 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useGlobalHooks } from "@/hooks/globalHooks";
+import React from "react";
 
 const DonationCountDown = () => {
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    mins: number;
-    secs: number;
-  }>({
-    days: 30,
-    hours: 0,
-    mins: 0,
-    secs: 0,
-  });
+  const endDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
 
-  const getTimeLeft = (endDateVal: string) => {
-    const endDate = new Date(endDateVal).getTime();
-    const now = new Date().getTime();
-    const timeLeft = endDate - now;
-
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-    );
-    const mins = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    return { days, hours, mins, secs };
-  };
-
-  const endData = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft((prev) => ({
-        ...prev,
-        ...getTimeLeft(String(endData)),
-      }));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const { timeLeft } = useGlobalHooks(endDate.toString());
 
   return (
     <section className="container mt-5 grid grid-cols-2 gap-3 gap-y-3 lg:grid-cols-4">

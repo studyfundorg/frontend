@@ -20,6 +20,7 @@
   --font-sans: "Reddit Sans", "san-serif";
   --color-primary: #085bcf;
   --color-secondary: #86b8ff;
+  --color-alternative: #1570ef;
   --color-ebonyclay: #1d2939;
   --color-white: #fff;
   --color-black: #1e1e1e;
@@ -30,6 +31,7 @@
   --color-Grey5: #f9fafb;
   --color-Grey6: #f2f4f7;
   --color-Grey7: #868a90;
+  --color-Line: #e4e7ec;
   --shadow-3xl: 0px 4px 12px 0px #0000000d;
   --shadow-4xl: 0px 0px 28px 0px #0000001c;
 }
@@ -37,6 +39,10 @@
 a {
   text-decoration: none;
   color: var(--color-Grey1);
+}
+
+button {
+  cursor: pointer;
 }
 
 body {
@@ -90,8 +96,13 @@ em {
   font-size: inherit;
 }
 
+small {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
 .card {
-  border: solid 1px #e4e7ec;
+  border: solid 1px var(--color-Line);
   border-radius: 8px;
 }
 
@@ -201,6 +212,89 @@ em {
 .studentHero {
   background: url("../public/images/student.png") top center no-repeat;
   background-size: cover;
+}
+
+/* ====Inputs Starts==== */
+.form-controls:disabled {
+  opacity: 0.3 !important;
+}
+
+.search {
+  position: relative;
+}
+
+.search input {
+  display: flex;
+}
+
+.searchIcon {
+  position: absolute;
+  font-size: 1.5rem;
+  right: 3%;
+  color: var(--color-Line);
+}
+
+.form-controls {
+  display: block;
+  width: 100%;
+  padding: 0.69em 1em;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-ebonyclay);
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid var(--color-Line);
+  border-radius: 123px;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  padding-left: 2em;
+}
+
+input::placeholder {
+  font-size: 13px;
+  font-weight: 200;
+  color: var(--color-ebonyclay) !important;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: 1em;
+  height: 1em;
+  border: solid 1px var(--color-Grey2) !important;
+}
+
+input:checked[type="radio"],
+input:checked[type="checkbox"] {
+  width: 1em;
+  height: 1em;
+  border: solid 1px var(--color-Grey2);
+  background-color: var(--color-primary);
+}
+
+textarea:focus,
+select:focus,
+input:focus {
+  border: solid 2.1px var(--color-primary);
+  outline: 0;
+  border-radius: inherit;
+}
+
+label {
+  font-size: 0.875rem;
+  color: #2c2d2e;
+  margin-bottom: 0.3em;
+  font-weight: 400;
+}
+
+.inputWrapper {
+  width: 100%;
+}
+
+@media screen and (min-width: 500px) {
+  .inputWrapper {
+    width: 48%;
+  }
 }
 
 @media screen and (max-width: 900px) {
