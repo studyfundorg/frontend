@@ -26,6 +26,10 @@ import studyFund from "@/public/images/StudyFund.png";
 import privyLogo from "@/public/images/privyLogo.png";
 import edu from "@/public/images/edu.png";
 import donateHeroImg from "@/public/images/donateHeroImg.png";
+import thankyouBanner from "@/public/images/thankyouBanner.png";
+import footerBanner from "@/public/images/footerBanner.png";
+import globalBanner from "@/public/images/globalBanner.png";
+import user from "@/public/images/user.png";
 
 export const allImages = {
   brandLogo,
@@ -56,4 +60,8 @@ export const allImages = {
   privyLogo,
   edu,
   donateHeroImg,
+  thankyouBanner,
+  footerBanner,
+  globalBanner,
+  user,
 };

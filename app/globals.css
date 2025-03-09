@@ -31,6 +31,7 @@
   --color-Grey5: #f9fafb;
   --color-Grey6: #f2f4f7;
   --color-Grey7: #868a90;
+  --color-Grey8: #9fa1a5;
   --color-Line: #e4e7ec;
   --shadow-3xl: 0px 4px 12px 0px #0000000d;
   --shadow-4xl: 0px 0px 28px 0px #0000001c;
@@ -38,7 +39,6 @@
 
 a {
   text-decoration: none;
-  color: var(--color-Grey1);
 }
 
 button {
@@ -203,7 +203,7 @@ small {
 }
 
 .outline-btn {
-  border: solid 1px #cbd5e1;
+  border: solid 1px var(--color-Line);
   color: var(--Grey1);
 }
 

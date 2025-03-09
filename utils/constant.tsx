@@ -90,3 +90,20 @@ export const whyStudentData = [
     imgUrl: allImages.exIcon,
   },
 ];
+
+const user = {
+  name: "Chimacherem Israel",
+  cgpa: "4.25",
+  school: "Humboldt University of Berlin",
+  credit: 250,
+  imgUrl: allImages.user,
+};
+const user2 = {
+  name: "Chimacherem Israel",
+  cgpa: "4.25",
+  school: "Humboldt University of Berlin",
+  imgUrl: allImages.user,
+};
+
+export const fundedUser = Array.from({ length: 12 }, () => user);
+export const participantUser = Array.from({ length: 12 }, () => user2);
