@@ -21,3 +21,26 @@ export const formatNumInThousands = (number: number | string) => {
 
   return formattedVal;
 };
+
+export const handleCopyToClipboard = (
+  id: string | number,
+  val: string,
+  // message: string,
+) => {
+  if (id) {
+    navigator.clipboard.writeText(val);
+
+    //   toast({
+    //     title: "Success",
+    //     description: message,
+    //     className: "bg-SeaGreen border-SeaGreen",
+    //   });
+  }
+};
+
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

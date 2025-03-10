@@ -21,26 +21,24 @@ export default function page() {
           />
 
           <form action="" className="mt-4 flex flex-wrap gap-4">
-            <article className="card inputWrapper flex justify-between p-3">
-              <input
-                type="tel"
-                placeholder="0.0"
-                className="w-6/12 !border-0 focus:!outline-0"
-                required
-              />
+            <article className="card inputWrapper flex items-center justify-between p-3">
+              <div className="w-6/12">
+                <p className="text-ebonyclay text-start !text-sm !font-medium">
+                  0.02
+                </p>
+              </div>
 
               <div className="flex items-center justify-end gap-2">
                 <Image src={allImages.edu} alt="" className="size-6" />{" "}
                 <span> EDU</span>
               </div>
             </article>
-            <article className="card inputWrapper flex justify-between p-4">
-              <input
-                type="tel"
-                placeholder="0.0"
-                className="w-6/12 !border-0 focus:!outline-0"
-                required
-              />
+            <article className="card inputWrapper flex items-center justify-between p-3">
+              <div className="w-6/12">
+                <p className="text-ebonyclay text-start !text-sm !font-medium">
+                  100
+                </p>
+              </div>
 
               <div className="flex flex-1 items-center justify-end gap-2">
                 <USDTIcon /> <span> USDT</span>
