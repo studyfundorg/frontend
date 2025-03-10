@@ -30,8 +30,13 @@ import thankyouBanner from "@/public/images/thankyouBanner.png";
 import footerBanner from "@/public/images/footerBanner.png";
 import globalBanner from "@/public/images/globalBanner.png";
 import user from "@/public/images/user.png";
+import walletIcon from "@/public/images/walletIcon.png";
+import gold from "@/public/images/gold.png";
+import silver from "@/public/images/silver.png";
+import bronze from "@/public/images/bronze.png";
 
 export const allImages = {
+  walletIcon,
   brandLogo,
   studyFund,
   how,
@@ -64,4 +69,7 @@ export const allImages = {
   footerBanner,
   globalBanner,
   user,
+  gold,
+  silver,
+  bronze,
 };

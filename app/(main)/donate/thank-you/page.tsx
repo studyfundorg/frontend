@@ -51,10 +51,14 @@ export default function page() {
       </section>
 
       <section className="mt-7 mb-20 flex flex-wrap justify-center gap-3">
-        <Button className="outline-btn !text-primary w-full lg:w-fit">
+        <Button
+          link
+          href="/leaderboard"
+          className="outline-btn !text-primary w-full lg:w-fit"
+        >
           Go to Donation Leaderboard
         </Button>
-        <Button className="pry-btn w-full lg:w-fit">
+        <Button link href="/referral" className="pry-btn w-full lg:w-fit">
           Refer for a free raffle slot
         </Button>
       </section>
