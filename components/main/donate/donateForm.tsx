@@ -1,14 +1,25 @@
 "use client";
 import Button from "@/components/ui/Button";
-import React, { FormEvent, useState } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import Warning from "../warning";
 
-const DonateForm = () => {
+const DonateForm = ({
+  isChecked,
+  setIsChecked,
+}: {
+  isChecked: boolean;
+  setIsChecked: Dispatch<SetStateAction<boolean>>;
+}) => {
   const initialState = {
     duration: "",
     amount: 0,
     noRaffle: false,
   };
-  const amountData = [10, 50, 100];
+  const amountData = [
+    { amount: 10, slot: 1 },
+    { amount: 50, slot: 6 },
+    { amount: 100, slot: 15 },
+  ];
 
   const [donate, setDonate] = useState(initialState);
 
@@ -70,8 +81,8 @@ const DonateForm = () => {
             <input
               name="noRaffle"
               type="checkbox"
-              checked={donate?.noRaffle}
-              onChange={handleChange}
+              checked={isChecked}
+              onChange={(e) => setIsChecked(!isChecked)}
             />{" "}
             <label htmlFor="duration" className="!m-0 !text-xs !text-[#6A6C6F]">
               I do not want to participate in the raffle draw. I want all my
@@ -87,12 +98,21 @@ const DonateForm = () => {
                 <input
                   name="amount"
                   type="radio"
-                  checked={donate?.amount === item}
-                  defaultValue={item}
+                  checked={donate?.amount === item?.amount}
+                  defaultValue={item?.amount}
                   onChange={handleChange}
                 />{" "}
-                <label htmlFor="amount" className="!m-0">
-                  ${item}
+                <label
+                  htmlFor="amount"
+                  className="!m-0 flex flex-1 justify-between"
+                >
+                  ${item?.amount}{" "}
+                  {!isChecked && (
+                    <span className="text-sm text-[#7C7E81]">
+                      {" "}
+                      {item?.slot} slots
+                    </span>
+                  )}
                 </label>
               </li>
             ))}
@@ -113,6 +133,11 @@ const DonateForm = () => {
           </ul>
         </li>
       </ul>
+
+      <Warning
+        title="The slot you get increases your chances of winning"
+        className="mt-5"
+      />
 
       <Button
         link
