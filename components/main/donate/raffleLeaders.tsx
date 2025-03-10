@@ -1,11 +1,6 @@
-import {
-  BronzTrophyIcon,
-  GoldTrophyIcon,
-  SilverTrophyIcon,
-  USDTIcon,
-} from "@/public/svgs/svgs";
+import { USDTIcon } from "@/public/svgs/svgs";
 import { formatNumInThousands } from "@/utils/helpers";
-import React, { ReactNode } from "react";
+import React from "react";
 
 const RaffleLeaders = ({
   item: { rank, value },

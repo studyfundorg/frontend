@@ -82,7 +82,7 @@ const DonateForm = ({
               name="noRaffle"
               type="checkbox"
               checked={isChecked}
-              onChange={(e) => setIsChecked(!isChecked)}
+              onChange={() => setIsChecked(!isChecked)}
             />{" "}
             <label htmlFor="duration" className="!m-0 !text-xs !text-[#6A6C6F]">
               I do not want to participate in the raffle draw. I want all my

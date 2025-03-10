@@ -1,7 +1,6 @@
 import { allImages } from "@/public/images/images";
 import Image from "next/image";
 import React from "react";
-import { BsCircle, BsCircleFill } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 
 const Friends = () => {
