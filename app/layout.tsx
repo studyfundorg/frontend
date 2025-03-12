@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import AOSAnimation from "@/utils/AosInit";
 import NextTopLoader from "nextjs-toploader";
+import Providers from "@/context/PrivyProvider";
 
 const redditSans = localFont({
   src: [
@@ -46,7 +47,9 @@ export default function RootLayout({
       <body className={redditSans?.variable}>
         <NextTopLoader showSpinner={false} />
 
-        <AOSAnimation>{children}</AOSAnimation>
+        <Providers>
+          <AOSAnimation>{children}</AOSAnimation>
+        </Providers>
       </body>
     </html>
   );

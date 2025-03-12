@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { useGlobalHooks } from "@/hooks/globalHooks";
 import Button from "@/components/ui/Button";
@@ -7,6 +7,7 @@ import { HistoryIcon, LeaderIcon, ReferralIcon } from "@/public/svgs/svgs";
 import Hambugger from "@/components/navbar/Hambugger";
 import NavbarLinks from "./navbarLinks";
 import { FaPlus } from "react-icons/fa6";
+import { useWallets } from "@privy-io/react-auth";
 
 export const dashboardRoutes = [
   {
@@ -19,7 +20,6 @@ export const dashboardRoutes = [
     path: "/leaderboard",
     icon: <LeaderIcon />,
   },
-
   {
     name: "History",
     path: "/history",
@@ -29,6 +29,13 @@ export const dashboardRoutes = [
 
 const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
   const { handleToggle, toggle } = useGlobalHooks();
+
+  const { wallets } = useWallets();
+  const wallet = useMemo(() => wallets[0], [wallets]);
+
+  const formatAddress = (address: string) => {
+    return `${address.slice(0, 4)}.....${address.slice(-3)}`;
+  };
 
   return (
     <nav className="flex flex-1 justify-end">
@@ -68,7 +75,9 @@ const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
                 className="pry-btn !bg-Grey5 !border-Grey6 w-full !border !text-black"
                 type="button"
               >
-                0x4.....987
+                {wallet?.address
+                  ? formatAddress(wallet.address)
+                  : "0x4.....987"}
               </Button>
             </div>
           </div>

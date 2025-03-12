@@ -12,7 +12,7 @@ export default function page() {
   return (
     <main className="container py-5">
       <section className="mt-10 flex flex-wrap gap-5 overflow-x-hidden">
-        <article className="flex-1">
+        <article className="h-sceen flex-1 overflow-hidden">
           <article
             data-aos="fade-right"
             className="card mb-10 flex-1 !space-y-4 !rounded-2xl p-5"
