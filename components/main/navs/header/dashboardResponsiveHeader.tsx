@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useGlobalHooks } from "@/hooks/globalHooks";
 import Button from "@/components/ui/Button";
@@ -7,6 +7,7 @@ import { HistoryIcon, LeaderIcon, ReferralIcon } from "@/public/svgs/svgs";
 import Hambugger from "@/components/navbar/Hambugger";
 import NavbarLinks from "./navbarLinks";
 import { FaPlus } from "react-icons/fa6";
+import { useWallets } from "@privy-io/react-auth";
 
 export const dashboardRoutes = [
   {
@@ -29,6 +30,13 @@ export const dashboardRoutes = [
 
 const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
   const { handleToggle, toggle } = useGlobalHooks();
+
+  const { ready, wallets } = useWallets();
+
+  useEffect(() => {
+    console.log(ready);
+    console.log(wallets);
+  }, []);
 
   return (
     <nav className="flex flex-1 justify-end">

@@ -1,7 +1,6 @@
 import BrandLogo from "@/components/BrandLogo";
-import Button from "@/components/ui/Button";
-import { allImages } from "@/public/images/images";
-import Image from "next/image";
+import LoginWithPrivy from "@/components/main/auth/loginWithPrivy";
+
 import React from "react";
 
 export default function page() {
@@ -14,19 +13,7 @@ export default function page() {
         <article className="">
           <h1>Every student deserves a future</h1>
 
-          <Button
-            link
-            href="/faucet"
-            className="pry-btn mt-10 mb-3 w-full gap-4"
-          >
-            {" "}
-            <Image
-              src={allImages.privyLogo}
-              alt="Privy Logo"
-              className="w-4"
-            />{" "}
-            Continue with Privy
-          </Button>
+          <LoginWithPrivy />
 
           <p className="text-Grey3 !mx-auto max-w-sm">
             By using StudyFund, you agree to our{" "}

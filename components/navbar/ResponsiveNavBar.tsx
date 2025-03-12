@@ -1,14 +1,22 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import NavbarLink from "./NavbarLink";
 import Hambugger from "./Hambugger";
 import { navbarRoutes } from "../routes";
 import { useGlobalHooks } from "@/hooks/globalHooks";
 import Button from "../ui/Button";
 import { usePathname } from "next/navigation";
+import { useWallets } from "@privy-io/react-auth";
 
 const ResponsiveNavBar = ({ styles }: { styles: any }) => {
   const { handleToggle, toggle } = useGlobalHooks();
+
+  const { ready, wallets } = useWallets();
+
+  useEffect(() => {
+    console.log(ready);
+    console.log(wallets);
+  }, []);
 
   const path = usePathname();
 

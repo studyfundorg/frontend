@@ -1,12 +1,26 @@
+"use client";
 import BrandLogo from "@/components/BrandLogo";
 import Warning from "@/components/main/warning";
 import Button from "@/components/ui/Button";
 import { allImages } from "@/public/images/images";
 import { USDTIcon } from "@/public/svgs/svgs";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 
-export default function page() {
+export default function Page() {
+  const { ready, wallets } = useWallets();
+
+  const privy = usePrivy();
+
+  const wallet = useMemo(() => wallets[0], [wallets]);
+
+  useEffect(() => {
+    console.log(ready);
+    console.log(wallets);
+    console.log(privy);
+  }, [ready, wallets, privy]);
+
   return (
     <main className="grid min-h-screen place-items-center">
       <section className="flex max-w-lg flex-col items-center justify-center space-y-6 px-3 text-center">
@@ -51,7 +65,7 @@ export default function page() {
               </p>
               <div className="card mt-3 flex justify-between p-4">
                 <p className="text-ebonyclay text-start !text-sm !font-medium">
-                  0x3445678897654345678907654tygu8765
+                  {wallet?.address}
                 </p>
               </div>
             </article>
