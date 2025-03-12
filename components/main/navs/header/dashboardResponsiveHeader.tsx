@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useMemo } from "react";
 
 import { useGlobalHooks } from "@/hooks/globalHooks";
 import Button from "@/components/ui/Button";
@@ -20,7 +20,6 @@ export const dashboardRoutes = [
     path: "/leaderboard",
     icon: <LeaderIcon />,
   },
-
   {
     name: "History",
     path: "/history",
@@ -31,12 +30,12 @@ export const dashboardRoutes = [
 const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
   const { handleToggle, toggle } = useGlobalHooks();
 
-  const { ready, wallets } = useWallets();
+  const { wallets } = useWallets();
+  const wallet = useMemo(() => wallets[0], [wallets]);
 
-  useEffect(() => {
-    console.log(ready);
-    console.log(wallets);
-  }, []);
+  const formatAddress = (address: string) => {
+    return `${address.slice(0, 4)}.....${address.slice(-3)}`;
+  };
 
   return (
     <nav className="flex flex-1 justify-end">
@@ -76,7 +75,9 @@ const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
                 className="pry-btn !bg-Grey5 !border-Grey6 w-full !border !text-black"
                 type="button"
               >
-                0x4.....987
+                {wallet?.address
+                  ? formatAddress(wallet.address)
+                  : "0x4.....987"}
               </Button>
             </div>
           </div>

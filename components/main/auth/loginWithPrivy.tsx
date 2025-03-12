@@ -13,9 +13,9 @@ const LoginWithPrivy = () => {
 
   useEffect(() => {
     if (authenticated) {
-      push("/faucet");
+      push("/donate");
     }
-  }, []);
+  }, [authenticated]);
 
   return (
     <div>

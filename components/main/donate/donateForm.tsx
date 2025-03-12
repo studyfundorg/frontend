@@ -1,7 +1,7 @@
 "use client";
-import Button from "@/components/ui/Button";
 import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import Warning from "../warning";
+import ClaimToken from "../claimToken";
 
 const DonateForm = ({
   isChecked,
@@ -139,14 +139,16 @@ const DonateForm = ({
         className="mt-5"
       />
 
-      <Button
+      {/* <Button
         link
         href="/donate/thank-you"
         className="pry-btn mt-7 w-full gap-4"
         type="submit"
       >
         Donate
-      </Button>
+      </Button> */}
+
+      <ClaimToken />
     </form>
   );
 };
