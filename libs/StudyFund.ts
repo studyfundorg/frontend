@@ -109,7 +109,7 @@ export class AdminStudyFund extends StudyFundBase {
 
     // Connect contracts to signer
     this.contract = this.contract.connect(this.signer) as StudyFundContract;
-    this.usdtContract = this.usdtContract.connect(this.signer);
+    this.usdtContract = this.usdtContract.connect(this.signer) as ethers.Contract;
   }
 
   /**

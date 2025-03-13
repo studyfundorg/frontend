@@ -16,7 +16,7 @@ const LoginWithPrivy = () => {
     if (authenticated && ready) {
       push("/donate");
     }
-  }, [authenticated, ready]);
+  }, [authenticated, ready, push]);
 
   return (
     <div>

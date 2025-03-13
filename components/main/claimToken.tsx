@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import Button from "../ui/Button";
-import { useWallets } from "@privy-io/react-auth";
 import Warning from "./warning";
 import Image from "next/image";
 import { allImages } from "@/public/images/images";
