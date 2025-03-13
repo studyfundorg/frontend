@@ -1,21 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import localFont from "next/font/local";
 import AOSAnimation from "@/utils/AosInit";
 import NextTopLoader from "nextjs-toploader";
 import Providers from "@/context/PrivyProvider";
 
-const redditSans = localFont({
-  src: [
-    {
-      path: "../allfonts/RedditSans-VariableFont_wght.ttf",
-      weight: "300 900",
-      style: "normal",
-    },
-  ],
-  variable: "--reddit-sans-font",
-  display: "swap",
-});
+import { redditSans } from "@/fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://textworld.vercel.app"),

@@ -13,18 +13,41 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import { useBlockchain } from "@/context/BlockchainProvider";
+import { request } from "http";
+import { useRouter } from "next/navigation";
 
-const ClaimToken = () => {
-  const { wallets } = useWallets();
-  const wallet = useMemo(() => wallets[0], [wallets]);
+const ClaimToken = ({ amount }: { amount: number }) => {
   const [open, setOpen] = useState(false);
+  const { wallet, requestTestTokens, getUSDTBalance } = useBlockchain();
+
+  const handleClaimToken = async () => {
+    try {
+      const rsp = await requestTestTokens(amount);
+      console.log(rsp);
+
+      // href="/donate/thank-you"
+      // push()
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDonation = async () => {
+    try {
+      const balance = await getUSDTBalance();
+
+      console.log(balance);
+      // setOpen(true)
+    } catch (error) {}
+  };
 
   return (
     <>
       <Button
         className="pry-btn mt-7 w-full gap-4"
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={handleDonation}
       >
         Donate
       </Button>
@@ -44,11 +67,11 @@ const ClaimToken = () => {
               className="mt-10"
             />
 
-            <form action="" className="mt-4 flex flex-wrap gap-4">
+            <section className="mt-4 flex flex-wrap gap-4">
               <article className="card inputWrapper flex items-center justify-between p-3">
                 <div className="w-6/12">
                   <p className="text-ebonyclay text-start !text-sm !font-medium">
-                    0.02
+                    0.001
                   </p>
                 </div>
 
@@ -60,7 +83,7 @@ const ClaimToken = () => {
               <article className="card inputWrapper flex items-center justify-between p-3">
                 <div className="w-6/12">
                   <p className="text-ebonyclay text-start !text-sm !font-medium">
-                    100
+                    {amount}
                   </p>
                 </div>
 
@@ -80,10 +103,14 @@ const ClaimToken = () => {
                 </div>
               </article>
 
-              <Button className="pry-btn mt-2 w-full gap-4" type="submit">
+              <Button
+                className="pry-btn mt-2 w-full gap-4"
+                type="button"
+                onClick={handleClaimToken}
+              >
                 Claim tokens
               </Button>
-            </form>
+            </section>
           </article>
         </DialogContent>
       </Dialog>
