@@ -13,20 +13,62 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import { useBlockchain } from "@/context/BlockchainProvider";
+import { useRouter } from "next/navigation";
 
-const ClaimToken = () => {
-  const { wallets } = useWallets();
-  const wallet = useMemo(() => wallets[0], [wallets]);
+const ClaimToken = ({ amount }: { amount: number }) => {
   const [open, setOpen] = useState(false);
+  const { wallet, requestTestTokens, getUSDTBalance, donate } = useBlockchain();
+  const [isLoading, setIsLoading] = useState(false);
+  const { push } = useRouter();
+
+  const handleClaimToken = async () => {
+    try {
+      setIsLoading(true);
+      if (!await requestTestTokens(amount)) return;
+      
+      setOpen(false)
+      console.log("donating")
+      const tx = await donate(amount)
+      console.log(tx)
+
+      if (tx?.status === 1) push("/donate/thank-you")
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDonation = async () => {
+    try {
+      setIsLoading(true);
+      const balance = await getUSDTBalance();
+      if (parseFloat(balance) < amount) {
+        setOpen(true);
+        return;
+      }
+
+      setIsLoading(true);
+      console.log("donating")
+      const tx = await donate(amount)
+      console.log(tx)
+
+      if (tx?.status === 1) push("/donate/thank-you")
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
       <Button
         className="pry-btn mt-7 w-full gap-4"
         type="button"
-        onClick={() => setOpen(true)}
+        disabled={isLoading}
+        onClick={handleDonation}
       >
-        Donate
+        {isLoading ? "Loading..." : "Donate"}
       </Button>
 
       <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
@@ -44,11 +86,11 @@ const ClaimToken = () => {
               className="mt-10"
             />
 
-            <form action="" className="mt-4 flex flex-wrap gap-4">
+            <section className="mt-4 flex flex-wrap gap-4">
               <article className="card inputWrapper flex items-center justify-between p-3">
                 <div className="w-6/12">
                   <p className="text-ebonyclay text-start !text-sm !font-medium">
-                    0.02
+                    0.001
                   </p>
                 </div>
 
@@ -60,7 +102,7 @@ const ClaimToken = () => {
               <article className="card inputWrapper flex items-center justify-between p-3">
                 <div className="w-6/12">
                   <p className="text-ebonyclay text-start !text-sm !font-medium">
-                    100
+                    {amount}
                   </p>
                 </div>
 
@@ -80,10 +122,15 @@ const ClaimToken = () => {
                 </div>
               </article>
 
-              <Button className="pry-btn mt-2 w-full gap-4" type="submit">
-                Claim tokens
+              <Button
+                className="pry-btn mt-2 w-full gap-4"
+                type="button"
+                onClick={handleClaimToken}
+                disabled={isLoading}
+              >
+                {isLoading ? "Claiming..." : "Claim tokens"}
               </Button>
-            </form>
+            </section>
           </article>
         </DialogContent>
       </Dialog>

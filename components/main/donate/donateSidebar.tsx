@@ -17,7 +17,7 @@ const DonateSidebar = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <aside className="h-[80vh] w-full space-y-5 overflow-y-auto lg:w-5/12">
+    <aside className="h-[65vh] w-full space-y-5 overflow-y-auto lg:w-5/12">
       {!isChecked && (
         <section className="bg-alternative grid grid-cols-1 justify-between gap-4 rounded-2xl bg-[url('/images/splashBg.png')] bg-contain bg-left bg-no-repeat p-5 md:grid-cols-2">
           <article className="text-white">

@@ -148,7 +148,7 @@ const DonateForm = ({
         Donate
       </Button> */}
 
-      <ClaimToken />
+      <ClaimToken amount={donate?.amount} />
     </form>
   );
 };

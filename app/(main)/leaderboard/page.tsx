@@ -23,7 +23,7 @@ export default function page() {
   return (
     <main className="container pt-10">
       <article className="my-4">
-        <h4>Referral</h4>
+        <h4>Leaderboard</h4>
       </article>
 
       <section className="flex flex-wrap justify-between gap-4">
