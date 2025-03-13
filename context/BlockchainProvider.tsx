@@ -69,13 +69,20 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
         throw new Error("Wallet not connected");
       }
 
-      const estimate = await studyFundRef.current?.estimateDonationGasFee(amount)
-      console.log(estimate)
+      let estimatedFee = "0.001"; // Default value if estimation fails
+      
+      try {
+        const estimate = await studyFundRef.current?.estimateDonationGasFee(amount);
+        console.log("Gas estimate:", estimate);
+        estimatedFee = estimate.feeInEDU;
+      } catch (estimateError) {
+        console.warn("Failed to estimate gas, using default value:", estimateError);
+        // Continue with default value
+      }
       
       // Request USDT (ERC20) and EDU (native token)
       const usdtTx = await studyFundRef.current?.requestTestUSDT(amount);
-
-      const eduTx = await studyFundRef.current?.requestTestEDU(parseFloat(estimate.feeInEDU));
+      const eduTx = await studyFundRef.current?.requestTestEDU(parseFloat(estimatedFee));
 
       const rsp = await Promise.all([usdtTx.wait(), eduTx.wait()]);
 

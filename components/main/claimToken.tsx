@@ -19,21 +19,40 @@ const ClaimToken = ({ amount }: { amount: number }) => {
   const [open, setOpen] = useState(false);
   const { wallet, requestTestTokens, getUSDTBalance, donate } = useBlockchain();
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { push } = useRouter();
 
   const handleClaimToken = async () => {
     try {
       setIsLoading(true);
-      if (!await requestTestTokens(amount)) return;
+      setErrorMessage(null);
       
-      setOpen(false)
-      console.log("donating")
-      const tx = await donate(amount)
-      console.log(tx)
+      const tokensReceived = await requestTestTokens(amount);
+      
+      if (!tokensReceived) {
+        setErrorMessage("Failed to receive test tokens. Please try again.");
+        return;
+      }
+      
+      setOpen(false);
+      console.log("donating");
+      
+      try {
+        const tx = await donate(amount);
+        console.log(tx);
 
-      if (tx?.status === 1) push("/donate/thank-you")
+        if (tx?.status === 1) {
+          push("/donate/thank-you");
+        } else {
+          setErrorMessage("Donation transaction failed. Please try again.");
+        }
+      } catch (donateError) {
+        console.error("Donation error:", donateError);
+        setErrorMessage("Error during donation. Please try again later.");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Claim token error:", error);
+      setErrorMessage("Failed to claim tokens. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -42,18 +61,26 @@ const ClaimToken = ({ amount }: { amount: number }) => {
   const handleDonation = async () => {
     try {
       setIsLoading(true);
+      setErrorMessage(null);
+      
       const balance = await getUSDTBalance();
       if (parseFloat(balance) < amount) {
         setOpen(true);
         return;
       }
 
-      setIsLoading(true);
-      console.log("donating")
-      const tx = await donate(amount)
-      console.log(tx)
+      console.log("donating");
+      const tx = await donate(amount);
+      console.log(tx);
 
-      if (tx?.status === 1) push("/donate/thank-you")
+      if (tx?.status === 1) {
+        push("/donate/thank-you");
+      } else {
+        setErrorMessage("Donation transaction failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Donation error:", error);
+      setErrorMessage("Error during donation. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -84,6 +111,12 @@ const ClaimToken = ({ amount }: { amount: number }) => {
               title=" We noticed you do not have EDU token and USDT to test"
               className="mt-10"
             />
+
+            {errorMessage && (
+              <div className="mt-4 rounded-md bg-red-50 p-3 text-red-600">
+                {errorMessage}
+              </div>
+            )}
 
             <section className="mt-4 flex flex-wrap gap-4">
               <article className="card inputWrapper flex items-center justify-between p-3">
