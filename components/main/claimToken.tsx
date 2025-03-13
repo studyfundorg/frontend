@@ -14,32 +14,50 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { useBlockchain } from "@/context/BlockchainProvider";
-import { request } from "http";
 import { useRouter } from "next/navigation";
 
 const ClaimToken = ({ amount }: { amount: number }) => {
   const [open, setOpen] = useState(false);
-  const { wallet, requestTestTokens, getUSDTBalance } = useBlockchain();
+  const { wallet, requestTestTokens, getUSDTBalance, donate } = useBlockchain();
+  const [isLoading, setIsLoading] = useState(false);
+  const { push } = useRouter();
 
   const handleClaimToken = async () => {
     try {
-      const rsp = await requestTestTokens(amount);
-      console.log(rsp);
+      setIsLoading(true);
+      if (!await requestTestTokens(amount)) return;
+      
+      setOpen(false)
+      console.log("donating")
+      const tx = await donate(amount)
+      console.log(tx)
 
-      // href="/donate/thank-you"
-      // push()
+      if (tx?.status === 1) push("/donate/thank-you")
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleDonation = async () => {
     try {
+      setIsLoading(true);
       const balance = await getUSDTBalance();
+      if (parseFloat(balance) < amount) {
+        setOpen(true);
+        return;
+      }
 
-      console.log(balance);
-      // setOpen(true)
-    } catch (error) {}
+      setIsLoading(true);
+      console.log("donating")
+      const tx = await donate(amount)
+      console.log(tx)
+
+      if (tx?.status === 1) push("/donate/thank-you")
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -47,9 +65,10 @@ const ClaimToken = ({ amount }: { amount: number }) => {
       <Button
         className="pry-btn mt-7 w-full gap-4"
         type="button"
+        disabled={isLoading}
         onClick={handleDonation}
       >
-        Donate
+        {isLoading ? "Loading..." : "Donate"}
       </Button>
 
       <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
@@ -107,8 +126,9 @@ const ClaimToken = ({ amount }: { amount: number }) => {
                 className="pry-btn mt-2 w-full gap-4"
                 type="button"
                 onClick={handleClaimToken}
+                disabled={isLoading}
               >
-                Claim tokens
+                {isLoading ? "Claiming..." : "Claim tokens"}
               </Button>
             </section>
           </article>

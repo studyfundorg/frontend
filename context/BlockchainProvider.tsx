@@ -4,15 +4,15 @@ import { UserStudyFund } from "@/libs/UserStudyFund";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { TransactionReceipt } from "ethers";
 import { ethers } from "ethers";
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 import { createContext, useContext, useMemo, useState } from "react";
 
 // Define the type for context
 type BlockchainContextType = {
   wallet?: { address: string; usdtBalance: string };
-  donate: (amount: number) => Promise<[TransactionReceipt, TransactionReceipt]>;
-  requestTestTokens: (amount: number) => Promise<TransactionReceipt>;
-  getUSDTBalance: () => Promise<string | null>;
+  donate: (amount: number) => Promise<TransactionReceipt | null>;
+  requestTestTokens: (amount: number) => Promise<boolean>;
+  getUSDTBalance: () => Promise<string>;
 };
 
 const BlockchainContext = createContext<BlockchainContextType | null>(null);
@@ -20,8 +20,8 @@ const BlockchainContext = createContext<BlockchainContextType | null>(null);
 export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
   const { ready, authenticated } = usePrivy();
   const { wallets } = useWallets();
-  const [studyFund, setStudyFund] = useState<UserStudyFund | null>(null);
   const [usdtBalance, setUsdtBalance] = useState<string>("0");
+  const studyFundRef = useRef<UserStudyFund | null>(null);
 
   const wallet = useMemo(
     () => wallets.find((wallet) => wallet.walletClientType === "privy"),
@@ -29,49 +29,30 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
-    const getBalance = async () => {
-      if (studyFund && wallet) {
-        const balance = await getUSDTBalance();
-        setUsdtBalance(balance!);
-      }
-    };
-
-    const interval = setInterval(getBalance, 30000);
-    getBalance();
-
-    return () => clearInterval(interval);
-  }, [studyFund, setUsdtBalance]);
-
-  // Create StudyFund instance with useMemo to prevent unnecessary re-creation
-
-  useEffect(() => {
     // Connect wallet when authenticated
     const connectWallet = async () => {
-      if (ready && authenticated && wallets.length > 0) {
+      console.log("connectWallet", ready, authenticated, wallet);
+      if (ready && authenticated && wallet) {
         try {
-          // Get the embedded wallet from Privy
+          // Create an ethers signer from the Privy wallet
+          const provider = new ethers.BrowserProvider(
+            await wallet?.getEthereumProvider(),
+          );
 
-          if (wallet) {
-            // Create an ethers signer from the Privy wallet
-            const provider = new ethers.BrowserProvider(
-              await wallet?.getEthereumProvider(),
-            );
+          studyFundRef.current =
+            new UserStudyFund({
+              provider,
+              network: "testnet",
+              contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
+              usdtContractAddress: process.env.NEXT_PUBLIC_USDT_ADDRESS!,
+            });
 
-            setStudyFund(
-              new UserStudyFund({
-                provider,
-                network: "testnet",
-                contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
-                usdtContractAddress: process.env.NEXT_PUBLIC_USDT_ADDRESS!,
-              }),
-            );
+          const newSigner = await provider.getSigner();
+          console.log("newSigner", newSigner, provider);
 
-            const newSigner = await provider.getSigner();
-
-            // Connect the signer to StudyFund
-            await studyFund?.connect(newSigner);
-            console.log("Wallet connected successfully");
-          }
+          // Connect the signer to StudyFund
+          await studyFundRef.current?.connect(newSigner);
+          console.log("Wallet connected successfully");
         } catch (error) {
           console.error("Failed to connect wallet:", error);
         }
@@ -79,59 +60,77 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
     };
 
     connectWallet();
-  }, [ready, authenticated, wallets, studyFund]);
+  }, [ready, authenticated, wallet]);
 
   // Request test tokens
   const requestTestTokens = async (amount: number) => {
     try {
-      if (!studyFund?.isConnected()) {
+      if (!studyFundRef.current?.isConnected()) {
         throw new Error("Wallet not connected");
       }
 
+      const estimate = await studyFundRef.current?.estimateDonationGasFee(amount)
+      console.log(estimate)
+      
       // Request USDT (ERC20) and EDU (native token)
-      const usdtTx = await studyFund?.requestTestUSDT(amount); // Request 50 USDT
+      const usdtTx = await studyFundRef.current?.requestTestUSDT(amount);
 
-      const eduTx = await studyFund?.requestTestEDU(0.001); // Request 500 EDU (native token)
+      const eduTx = await studyFundRef.current?.requestTestEDU(parseFloat(estimate.feeInEDU));
 
       const rsp = await Promise.all([usdtTx.wait(), eduTx.wait()]);
 
       if (rsp[0]?.status === 1) {
         setUsdtBalance((await getUSDTBalance())!);
+      } else {
+        console.error("Failed to get test USDT tokens:", rsp[0]);
       }
 
-      return rsp;
-      //   console.log('Test tokens received!');
+      if (rsp[1]?.status !== 1) {
+        console.error("Failed to get test EDU tokens:", rsp[1]);
+      }
+
+      return rsp[0]?.status === 1 && rsp[1]?.status === 1;
     } catch (error) {
       console.error("Failed to get test tokens:", error);
+      return false;
     }
   };
 
   // Make a donation
   const donate = async (amount: number) => {
     try {
-      if (!studyFund?.isConnected()) {
+      if (!studyFundRef.current?.isConnected()) {
         throw new Error("Wallet not connected");
       }
-      const tx = await studyFund?.donate(amount); // Donate 10 USDT
+      const tx = await studyFundRef.current?.donate(amount); // Donate 10 USDT
       return await tx.wait();
-      //   console.log("Donation successful!");
     } catch (error) {
       console.error("Donation failed:", error);
+      return null;
     }
   };
 
   const getUSDTBalance = async () => {
     try {
-      if (!studyFund?.isConnected()) {
+      if (!studyFundRef.current?.isConnected()) {
         throw new Error("Wallet not connected");
       }
 
-      const balance = await studyFund?.getUSDTBalance();
+      const balance = await studyFundRef.current?.getUSDTBalance();
+      setUsdtBalance(balance!);
       return balance;
     } catch (error) {
       console.error("Failed to get USDT balance:", error);
+      return "0";
     }
   };
+
+  useEffect(() => {
+    getUSDTBalance();
+    const interval = setInterval(getUSDTBalance, 10000);
+
+    return () => clearInterval(interval);
+  }, [getUSDTBalance]);
 
   const blockchain: BlockchainContextType = {
     wallet: wallet ? { address: wallet.address, usdtBalance } : undefined,

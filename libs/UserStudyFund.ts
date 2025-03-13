@@ -109,6 +109,59 @@ export class UserStudyFund extends StudyFundBase {
   }
 
   /**
+   * Estimate gas fee for donating USDT to the StudyFund
+   * @param amountInUSDT Amount in USDT (e.g., 10 for $10 USDT)
+   * @returns Object containing estimated gas fee in EDU and whether approval is needed
+   * @throws Error if wallet is not connected
+   */
+  async estimateDonationGasFee(amountInUSDT: number): Promise<{
+    feeInEDU: string;
+    needsApproval: boolean;
+  }> {
+    if (!this.signer) {
+      throw new Error("Wallet not connected");
+    }
+
+    const amount = ethers.parseUnits(amountInUSDT.toString(), 6);
+    const userAddress = await this.signer.getAddress();
+    let totalGasEstimate = BigInt(0);
+    let needsApproval = false;
+
+    // Check if USDT approval is needed
+    const allowance = await this.usdtContract.allowance(
+      userAddress,
+      this.contractAddress,
+    );
+
+    // If approval is needed, estimate gas for approval transaction
+    if (allowance < amount) {
+      needsApproval = true;
+      const approvalGasEstimate = await this.usdtContract.approve.estimateGas(
+        this.contractAddress,
+        amount,
+      );
+      totalGasEstimate += approvalGasEstimate;
+    }
+
+    // Estimate gas for donation transaction
+    const donationGasEstimate = await this.contract.donate.estimateGas(amount);
+    totalGasEstimate += donationGasEstimate;
+
+    // Get current gas price
+    const feeData = await this.provider.getFeeData();
+    const gasPrice = feeData.gasPrice || ethers.parseUnits("5", "gwei"); // Default if undefined
+
+    // Calculate total fee in EDU (native token)
+    const feeInWei = totalGasEstimate * gasPrice;
+    const feeInEDU = ethers.formatEther(feeInWei);
+
+    return {
+      feeInEDU,
+      needsApproval,
+    };
+  }
+
+  /**
    * Claim prize for the connected wallet
    * @throws Error if wallet is not connected
    */

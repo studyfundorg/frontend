@@ -4,6 +4,7 @@ import { allImages } from "@/public/images/images";
 import { usePrivy } from "@privy-io/react-auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const LoginWithPrivy = () => {
   const { push } = useRouter();
@@ -12,10 +13,10 @@ const LoginWithPrivy = () => {
   const disableLogin = !ready || (ready && authenticated);
 
   useEffect(() => {
-    if (authenticated) {
+    if (authenticated && ready) {
       push("/donate");
     }
-  }, [authenticated]);
+  }, [authenticated, ready]);
 
   return (
     <div>
@@ -37,4 +38,3 @@ const LoginWithPrivy = () => {
 };
 
 export default LoginWithPrivy;
-import React, { useEffect } from "react";
