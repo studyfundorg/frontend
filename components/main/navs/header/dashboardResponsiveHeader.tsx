@@ -4,7 +4,6 @@ import React, { useMemo } from "react";
 import { useGlobalHooks } from "@/hooks/globalHooks";
 import Button from "@/components/ui/Button";
 import { HistoryIcon, LeaderIcon, ReferralIcon } from "@/public/svgs/svgs";
-import Hambugger from "@/components/navbar/Hambugger";
 import NavbarLinks from "./navbarLinks";
 import { FaPlus } from "react-icons/fa6";
 import { useWallets } from "@privy-io/react-auth";
@@ -27,8 +26,8 @@ export const dashboardRoutes = [
   },
 ];
 
-const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
-  const { handleToggle, toggle } = useGlobalHooks();
+const DashboardResponsiveHeader = () => {
+  const { handleToggle } = useGlobalHooks();
 
   const { wallets } = useWallets();
   const wallet = useMemo(() => wallets[0], [wallets]);
@@ -39,14 +38,12 @@ const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
 
   return (
     <nav className="flex flex-1 justify-end">
-      <section
-        className={`${toggle["navbar"] ? styles.closeNav : styles.openNav} w-full`}
-      >
+      <section className={`w-full`}>
         <article
-          className={`flex w-full flex-wrap justify-between gap-4 bg-white py-5 lg:bg-transparent`}
+          className={`flex w-full flex-wrap justify-end gap-4 py-5 lg:justify-between lg:bg-transparent`}
         >
           <ul
-            className={`flex flex-1 flex-col items-start justify-start gap-4 lg:flex-row lg:items-center lg:justify-end`}
+            className={`hidden flex-1 flex-col items-start justify-start gap-4 lg:flex lg:flex-row lg:items-center lg:justify-end`}
           >
             {dashboardRoutes.map(({ path, name, icon }, index) => (
               <NavbarLinks
@@ -59,20 +56,20 @@ const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
             ))}
           </ul>
 
-          <div className="flex w-full flex-wrap px-2 lg:w-fit lg:px-0">
-            <div className="w-full lg:w-fit">
+          <div className="flex w-fit justify-end gap-2 px-2 lg:px-0">
+            <div className="w-fit">
               <Button
                 link
                 href="/donate"
-                className="pry-btn w-full gap-3"
+                className="pry-btn gap-3 !px-4"
                 type="button"
               >
                 <FaPlus /> Donate
               </Button>
             </div>
-            <div className="w-full lg:w-fit">
+            <div className="w-fit">
               <Button
-                className="pry-btn !bg-Grey5 !border-Grey6 w-full !border !text-black"
+                className="pry-btn !bg-Grey5 !border-Grey6 !border !px-2 !text-black"
                 type="button"
               >
                 {wallet?.address
@@ -83,13 +80,6 @@ const DashboardResponsiveHeader = ({ styles }: { styles: any }) => {
           </div>
         </article>
       </section>
-      <div className="block w-3/12 md:w-1/12 lg:hidden">
-        <Hambugger
-          styles={styles}
-          action={() => handleToggle("navbar")}
-          toggle={toggle["navbar"]}
-        />
-      </div>
     </nav>
   );
 };

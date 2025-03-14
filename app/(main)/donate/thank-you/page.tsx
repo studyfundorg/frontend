@@ -50,7 +50,7 @@ export default function page() {
         </article>
       </section>
 
-      <section className="mt-7 mb-20 flex flex-wrap justify-center gap-3">
+      <section className="mt-7 mb-5 flex flex-wrap justify-center gap-3 px-3 lg:mb-20">
         <Button
           link
           href="/leaderboard"

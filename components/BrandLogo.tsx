@@ -10,7 +10,10 @@ const BrandLogo = ({
   className?: string;
 }) => {
   return (
-    <Link href={path ?? "/"} className={`${className} h-[42.71px] w-[157px]`}>
+    <Link
+      href={path ?? "/"}
+      className={`${className} h-[26px] w-[82px] lg:h-[42.71px] lg:w-[157px]`}
+    >
       <figure>
         <Image src={allImages.brandLogo} alt="Text world logo" />
       </figure>

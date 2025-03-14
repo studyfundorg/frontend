@@ -38,9 +38,40 @@ export const handleCopyToClipboard = (
   }
 };
 
+import { toast } from "@/hooks/use-toast";
 import { type ClassValue, clsx } from "clsx";
+import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export const handleSuccess = (
+  message: string,
+  push?: (href: string, options?: NavigateOptions) => void,
+  path?: string,
+) => {
+  if (path && push) {
+    toast({
+      variant: "default",
+      title: "Success",
+      description: message,
+    });
+    push(path);
+  } else {
+    toast({
+      variant: "default",
+      title: "Success",
+      description: message,
+    });
+  }
+};
+
+export const handleError = (message: string) => {
+  toast({
+    variant: "destructive",
+    title: "error",
+    description: message,
+  });
+};

@@ -27,8 +27,8 @@ export default function page() {
       </article>
 
       <section className="flex flex-wrap justify-between gap-4">
-        <section className="card flex-1 p-5">
-          <ul className="grid grid-cols-1 justify-center gap-8 lg:grid-cols-3">
+        <section className="card flex-1 p-2 md:p-5">
+          <ul className="grid grid-cols-3 justify-center gap-4">
             <li className="mt-20 flex flex-col items-center text-center">
               <figure className="w-9/12">
                 <Image src={allImages.bronze} alt="" />

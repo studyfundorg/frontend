@@ -28,15 +28,21 @@ import edu from "@/public/images/edu.png";
 import donateHeroImg from "@/public/images/donateHeroImg.png";
 import thankyouBanner from "@/public/images/thankyouBanner.png";
 import footerBanner from "@/public/images/footerBanner.png";
+import footerBannerM from "@/public/images/footerBannerm.png";
 import globalBanner from "@/public/images/globalBanner.png";
 import user from "@/public/images/user.png";
 import walletIcon from "@/public/images/walletIcon.png";
 import gold from "@/public/images/gold.png";
 import silver from "@/public/images/silver.png";
 import bronze from "@/public/images/bronze.png";
+import cap from "@/public/images/cap.png";
+import pen from "@/public/images/pen.png";
+import clock from "@/public/images/clock.png";
+import book from "@/public/images/book.png";
 
 export const allImages = {
   walletIcon,
+  footerBannerM,
   brandLogo,
   studyFund,
   how,
@@ -72,4 +78,8 @@ export const allImages = {
   gold,
   silver,
   bronze,
+  cap,
+  pen,
+  book,
+  clock,
 };
