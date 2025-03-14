@@ -1,6 +1,7 @@
 "use client";
 
 import { UserStudyFund } from "@/libs/UserStudyFund";
+import { handleError } from "@/utils/helpers";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { TransactionReceipt } from "ethers";
 import { ethers } from "ethers";
@@ -39,13 +40,12 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
             await wallet?.getEthereumProvider(),
           );
 
-          studyFundRef.current =
-            new UserStudyFund({
-              provider,
-              network: "testnet",
-              contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
-              usdtContractAddress: process.env.NEXT_PUBLIC_USDT_ADDRESS!,
-            });
+          studyFundRef.current = new UserStudyFund({
+            provider,
+            network: "testnet",
+            contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
+            usdtContractAddress: process.env.NEXT_PUBLIC_USDT_ADDRESS!,
+          });
 
           const newSigner = await provider.getSigner();
           console.log("newSigner", newSigner, provider);
@@ -70,19 +70,25 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
       }
 
       let estimatedFee = "0.001"; // Default value if estimation fails
-      
+
       try {
-        const estimate = await studyFundRef.current?.estimateDonationGasFee(amount);
+        const estimate =
+          await studyFundRef.current?.estimateDonationGasFee(amount);
         console.log("Gas estimate:", estimate);
         estimatedFee = estimate.feeInEDU;
       } catch (estimateError) {
-        console.warn("Failed to estimate gas, using default value:", estimateError);
+        console.warn(
+          "Failed to estimate gas, using default value:",
+          estimateError,
+        );
         // Continue with default value
       }
-      
+
       // Request USDT (ERC20) and EDU (native token)
       const usdtTx = await studyFundRef.current?.requestTestUSDT(amount);
-      const eduTx = await studyFundRef.current?.requestTestEDU(parseFloat(estimatedFee));
+      const eduTx = await studyFundRef.current?.requestTestEDU(
+        parseFloat(estimatedFee),
+      );
 
       const rsp = await Promise.all([usdtTx.wait(), eduTx.wait()]);
 
@@ -113,6 +119,7 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
       return await tx.wait();
     } catch (error) {
       console.error("Donation failed:", error);
+      handleError("Donation failed, Please try again.");
       return null;
     }
   };
@@ -120,7 +127,7 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
   const getUSDTBalance = async () => {
     try {
       if (!studyFundRef.current?.isConnected()) {
-        throw new Error("Wallet not connected");
+        return "Wallet not connected";
       }
 
       const balance = await studyFundRef.current?.getUSDTBalance();

@@ -1,18 +1,12 @@
-import { allImages } from "@/public/images/images";
-import Image from "next/image";
 import React from "react";
 import Button from "./Button";
 
 const Banner = () => {
   return (
-    <section className="relative container my-10 flex h-[240px] items-center justify-center">
-      <figure className="h-[230px]">
-        <Image src={allImages.footerBanner} alt="" />
-      </figure>
-
+    <section className="my-5 flex h-[200px] flex-col items-center justify-center overflow-hidden rounded-2xl bg-[url('/images/newBanner.png')] bg-cover bg-left-top bg-no-repeat lg:my-10 lg:h-[260px]">
       <article
         data-aos="fade-down"
-        className="absolute top-10 right-0 bottom-0 left-0 z-50 flex flex-col items-center gap-4 text-white"
+        className="flex flex-col items-center gap-4 text-center text-white"
       >
         <h4>No student left behind, education for all</h4>
         <Button className="pry-btn !text-primary !bg-white">

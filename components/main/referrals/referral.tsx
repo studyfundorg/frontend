@@ -5,7 +5,7 @@ import React from "react";
 
 const Referral = () => {
   return (
-    <section className="card p-5">
+    <section className="card p-3 lg:p-5">
       <article className="flex flex-col items-center gap-4">
         <ReferralBoxIcon />
         <article className="mx-auto max-w-sm text-center">
@@ -18,7 +18,7 @@ const Referral = () => {
       </article>
 
       <article className="mx-auto mt-12 flex max-w-xl flex-col items-center gap-4">
-        <form action="" className="flex w-full items-end gap-4">
+        <form action="" className="flex w-full flex-wrap items-end gap-4">
           <div className="flex flex-1 flex-col !space-y-2">
             <label htmlFor="email">Invite through email</label>
             <input
@@ -29,7 +29,7 @@ const Referral = () => {
             />
           </div>
 
-          <Button className="pry-btn" type="submit">
+          <Button className="pry-btn w-full lg:w-fit" type="submit">
             Send
           </Button>
         </form>

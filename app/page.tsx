@@ -136,7 +136,7 @@ export default function Home() {
         </article>
 
         <figure className="hidden lg:block">
-          <Image src={allImages.table} alt="" />
+          <Image src={allImages.table} alt="" className="!w-full" />
         </figure>
         <figure className="block lg:hidden">
           <Image src={allImages.tableM} alt="" />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../ui/Button";
 import Warning from "./warning";
 import Image from "next/image";
@@ -14,29 +14,32 @@ import {
 } from "../ui/dialog";
 import { useBlockchain } from "@/context/BlockchainProvider";
 import { useRouter } from "next/navigation";
+import { useGlobalHooks } from "@/hooks/globalHooks";
+import { handleError } from "@/utils/helpers";
 
 const ClaimToken = ({ amount }: { amount: number }) => {
   const [open, setOpen] = useState(false);
   const { wallet, requestTestTokens, getUSDTBalance, donate } = useBlockchain();
-  const [isLoading, setIsLoading] = useState(false);
+
+  const { loading, setLoading } = useGlobalHooks();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { push } = useRouter();
 
   const handleClaimToken = async () => {
     try {
-      setIsLoading(true);
+      setLoading({ ["claim"]: true });
       setErrorMessage(null);
-      
+
       const tokensReceived = await requestTestTokens(amount);
-      
+
       if (!tokensReceived) {
         setErrorMessage("Failed to receive test tokens. Please try again.");
         return;
       }
-      
+
       setOpen(false);
       console.log("donating");
-      
+
       try {
         const tx = await donate(amount);
         console.log(tx);
@@ -54,15 +57,16 @@ const ClaimToken = ({ amount }: { amount: number }) => {
       console.error("Claim token error:", error);
       setErrorMessage("Failed to claim tokens. Please try again later.");
     } finally {
-      setIsLoading(false);
+      setLoading({ ["claim"]: false });
     }
   };
 
   const handleDonation = async () => {
     try {
-      setIsLoading(true);
+      setLoading({ ["donation"]: true });
+
       setErrorMessage(null);
-      
+
       const balance = await getUSDTBalance();
       if (parseFloat(balance) < amount) {
         setOpen(true);
@@ -77,12 +81,13 @@ const ClaimToken = ({ amount }: { amount: number }) => {
         push("/donate/thank-you");
       } else {
         setErrorMessage("Donation transaction failed. Please try again.");
+        handleError("Donation transaction failed. Please try again.");
       }
     } catch (error) {
       console.error("Donation error:", error);
       setErrorMessage("Error during donation. Please try again later.");
     } finally {
-      setIsLoading(false);
+      setLoading({ ["donation"]: false });
     }
   };
 
@@ -91,14 +96,15 @@ const ClaimToken = ({ amount }: { amount: number }) => {
       <Button
         className="pry-btn mt-7 w-full gap-4"
         type="button"
-        disabled={isLoading}
         onClick={handleDonation}
+        disabled={amount === 0}
+        loading={loading["donation"]}
       >
-        {isLoading ? "Loading..." : "Donate"}
+        Donate
       </Button>
 
       <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
-        <DialogContent className="card space-y-6 bg-white">
+        <DialogContent className="card max-h-[95vh] space-y-6 overflow-y-auto bg-white !p-3 md:!p-6">
           <DialogHeader>
             <DialogTitle className="text-center !text-xl lg:!text-2xl">
               Claim your token
@@ -106,7 +112,7 @@ const ClaimToken = ({ amount }: { amount: number }) => {
             <DialogDescription></DialogDescription>
           </DialogHeader>
 
-          <article className="card !rounded-2xl p-5">
+          <article className="card !rounded-2xl p-2 md:p-5">
             <Warning
               title=" We noticed you do not have EDU token and USDT to test"
               className="mt-10"
@@ -148,7 +154,7 @@ const ClaimToken = ({ amount }: { amount: number }) => {
                   Wallet address
                 </p>
                 <div className="card mt-3 flex justify-between p-4">
-                  <p className="text-ebonyclay text-start !text-sm !font-medium">
+                  <p className="text-ebonyclay text-start !text-[9px] !font-medium lg:!text-sm">
                     {wallet?.address}
                   </p>
                 </div>
@@ -158,9 +164,9 @@ const ClaimToken = ({ amount }: { amount: number }) => {
                 className="pry-btn mt-2 w-full gap-4"
                 type="button"
                 onClick={handleClaimToken}
-                disabled={isLoading}
+                loading={loading["claim"]}
               >
-                {isLoading ? "Claiming..." : "Claim tokens"}
+                Claim tokens
               </Button>
             </section>
           </article>

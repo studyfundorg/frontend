@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import Spinner from "./skeleton/spinner";
 
 type ButtonProps = {
   link?: boolean;
@@ -41,7 +42,8 @@ const Button: React.FC<ButtonProps> = ({
       className={` ${className} btn flex items-center justify-center gap-2`}
       disabled={loading || disabled}
     >
-      {children}
+      {loading && <Spinner />}
+      {!loading && children}
     </button>
   );
 };

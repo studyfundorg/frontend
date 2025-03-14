@@ -1,12 +1,27 @@
 import BrandLogo from "@/components/BrandLogo";
 import LoginWithPrivy from "@/components/main/auth/loginWithPrivy";
+import { allImages } from "@/public/images/images";
+import Image from "next/image";
 
 import React from "react";
 
 export default function page() {
   return (
-    <main className="grid min-h-screen place-items-center">
-      <section className="flex max-w-lg flex-col items-center justify-center text-center">
+    <main className="relative grid min-h-screen place-items-center">
+      <figure className="absolute top-3 left-5 h-[108px] w-[86px] animate-pulse lg:top-20 lg:left-24 lg:h-[190px] lg:w-[243px]">
+        <Image src={allImages.clock} alt="" />
+      </figure>
+      <figure className="absolute top-2 right-2 h-[108px] w-[102px] animate-bounce lg:right-[200px] lg:h-[190px] lg:w-[243px]">
+        <Image src={allImages.pen} alt="" />
+      </figure>
+      <figure className="absolute bottom-1 left-1 h-[103px] w-[131px] animate-bounce lg:bottom-10 lg:left-10 lg:h-[190px] lg:w-[243px]">
+        <Image src={allImages.cap} alt="" />
+      </figure>
+      <figure className="absolute right-1 bottom-1 h-[91px] w-[130px] animate-pulse lg:right-16 lg:bottom-40 lg:h-[190px] lg:w-[243px]">
+        <Image src={allImages.book} alt="" />
+      </figure>
+
+      <section className="flex max-w-lg flex-col items-center justify-center px-2 text-center">
         <div className="!w-[141px]">
           <BrandLogo />
         </div>
