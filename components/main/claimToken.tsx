@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../ui/Button";
 import Warning from "./warning";
 import Image from "next/image";

@@ -1,24 +1,47 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
+export const HomeIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={18}
+    height={18}
+    fill="none"
+    {...props}
+  >
+    <path
+      fill="currentColor"
+      d="M15.667 15.667V6.61L9 2.61l-6.666 4v9.057h3.333v-2.292a3.333 3.333 0 0 1 6.667 0v2.292h3.333Zm-5 1.666v-3.958a1.667 1.667 0 0 0-3.333 0v3.958h-5a1.667 1.667 0 0 1-1.667-1.666V6.61a1.667 1.667 0 0 1 .81-1.43l6.666-4a1.667 1.667 0 0 1 1.715 0l6.666 4a1.666 1.666 0 0 1 .81 1.43v9.057a1.666 1.666 0 0 1-1.667 1.666h-5Z"
+    />
+  </svg>
+);
+
 export const ReferralIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
     height={24}
+    viewBox="0 0 24 24"
     fill="none"
     {...props}
   >
-    <circle cx={9} cy={6} r={4} stroke="#121315" strokeWidth={1.5} />
+    <circle cx={9} cy={6} r={4} stroke="currentColor" strokeWidth={1.5} />
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeWidth={1.5}
       d="M15 9a3 3 0 1 0 0-6"
     />
-    <ellipse cx={9} cy={17} stroke="#121315" strokeWidth={1.5} rx={7} ry={4} />
+    <ellipse
+      cx={9}
+      cy={17}
+      stroke="currentColor"
+      strokeWidth={1.5}
+      rx={7}
+      ry={4}
+    />
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeWidth={1.5}
       d="M18 14c1.754.385 3 1.359 3 2.5 0 1.03-1.014 1.923-2.5 2.37"
@@ -31,34 +54,35 @@ export const LeaderIcon = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     width={24}
     height={24}
+    viewBox="0 0 24 24"
     fill="none"
     {...props}
   >
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeWidth={1.2}
       d="M12 16c-5.76 0-6.78-5.74-6.96-10.294-.05-1.266-.076-1.9.4-2.485.476-.586 1.045-.682 2.184-.874A26.374 26.374 0 0 1 12 2c1.783 0 3.253.157 4.377.347 1.138.192 1.708.288 2.183.874.476.586.451 1.219.4 2.485-.18 4.553-1.2 10.294-6.96 10.294Z"
     />
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeWidth={1.2}
       d="M12 16v3"
     />
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.2}
       d="M15.5 22h-7l.34-1.696a1 1 0 0 1 .98-.804h4.36a1 1 0 0 1 .98.804L15.5 22Z"
     />
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeWidth={1.2}
       d="m19 5 .949.316c.99.33 1.485.495 1.768.888.283.393.283.915.283 1.958v.073c0 .86 0 1.291-.207 1.643-.207.352-.584.561-1.336.98L17.5 12.5M5 5l-.949.316c-.99.33-1.485.495-1.768.888C2 6.597 2 7.12 2 8.162v.073c0 .86 0 1.291.207 1.643.207.352.584.561 1.336.98L6.5 12.5M11.146 6.023C11.526 5.34 11.716 5 12 5c.284 0 .474.34.854 1.023l.098.176c.108.194.162.29.246.354.085.064.19.088.4.135l.19.044c.738.167 1.107.25 1.195.532.088.283-.164.577-.667 1.165l-.13.152c-.143.167-.215.25-.247.354-.032.104-.021.215 0 .438l.02.203c.076.785.114 1.178-.115 1.352-.23.174-.576.015-1.267-.303l-.178-.082c-.197-.09-.295-.135-.399-.135-.104 0-.202.045-.399.135l-.178.082c-.691.319-1.037.477-1.267.303-.23-.174-.191-.567-.115-1.352l.02-.203c.021-.223.032-.334 0-.438-.032-.103-.104-.187-.247-.354l-.13-.152c-.503-.588-.755-.882-.667-1.165.088-.282.457-.365 1.195-.532l.19-.044c.21-.047.315-.07.4-.135.084-.064.138-.16.246-.354l.098-.176Z"
     />
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeWidth={1.2}
       d="M18 22H6"
@@ -71,17 +95,18 @@ export const HistoryIcon = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     width={24}
     height={24}
+    viewBox="0 0 24 24"
     fill="none"
     {...props}
   >
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeWidth={1.5}
       d="M2 12c0 5.523 4.477 10 10 10s10-4.477 10-10S17.523 2 12 2"
     />
     <path
-      stroke="#121315"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
@@ -91,7 +116,7 @@ export const HistoryIcon = (props: SVGProps<SVGSVGElement>) => (
       cx={12}
       cy={12}
       r={10}
-      stroke="#121315"
+      stroke="currentColor"
       strokeDasharray="0.5 3.5"
       strokeLinecap="round"
       strokeWidth={1.5}
