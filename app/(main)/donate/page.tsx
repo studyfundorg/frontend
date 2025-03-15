@@ -47,7 +47,7 @@ export default function Page() {
           <Image src={allImages.donateHeroImg} alt="" />
         </figure>
       </article>
-      <section className="flex flex-col justify-end gap-5 overflow-x-hidden lg:flex-row">
+      <section className="flex flex-col justify-end gap-5 lg:flex-row">
         <article className="block w-full lg:hidden">
           <article
             data-aos="fade-right"

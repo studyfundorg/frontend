@@ -5,10 +5,9 @@ import { eduChainTestnet } from "viem/chains";
 import { BlockchainProvider } from "./BlockchainProvider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const appId = process.env.NEXT_PUBLIC_PRIVY_KEY;
   return (
     <PrivyProvider
-      appId={appId as string}
+      appId={process.env.NEXT_PUBLIC_PRIVY_KEY as string}
       config={{
         supportedChains: [eduChainTestnet],
       }}

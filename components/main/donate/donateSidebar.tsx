@@ -17,9 +17,9 @@ const DonateSidebar = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <aside className="h-full w-full space-y-5 overflow-y-auto lg:h-[65vh] lg:w-5/12">
+    <aside className="h-full w-full space-y-5 lg:w-5/12">
       {!isChecked && (
-        <section className="bg-alternative grid grid-cols-2 justify-between gap-4 rounded-2xl bg-[url('/images/splashBg.png')] bg-contain bg-left bg-no-repeat p-5">
+        <section className="bg-alternative flex justify-between gap-4 rounded-2xl bg-[url('/images/splashBg.png')] bg-contain bg-left bg-no-repeat p-5">
           <article className="text-white">
             <h5 className="text-sm font-semibold">Current Prize Pool</h5>
             <h3>$5,000</h3>
