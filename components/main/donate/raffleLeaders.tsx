@@ -1,26 +1,46 @@
-import { USDTIcon } from "@/public/svgs/svgs";
+import {
+  BronzTrophyIcon,
+  GoldTrophyIcon,
+  SilverTrophyIcon,
+  USDTIcon,
+} from "@/public/svgs/svgs";
 import { formatAddress, formatNumInThousands } from "@/utils/helpers";
-import React from "react";
+import React, { ReactNode } from "react";
 
 const RaffleLeaders = ({
-  donationCount,
+  home,
   totalDonated,
   address,
   index,
 }: {
   index: number;
 
-  donationCount: string;
+  home?: boolean;
   address: string;
   totalDonated: number;
 }) => {
+  const trophy: { [key: number]: ReactNode } = {
+    1: <GoldTrophyIcon />,
+    2: <SilverTrophyIcon />,
+    3: <BronzTrophyIcon />,
+  };
+
   return (
     <article className="flex justify-between">
       <div className="flex gap-5">
-        <span className="grid size-7 place-items-center rounded-full bg-[#F9F9F9] !text-xs !font-medium">
-          {" "}
-          {index + 1}
-        </span>
+        {home ? (
+          (trophy[index + 1] ?? (
+            <span className="grid size-7 place-items-center rounded-full bg-[#F9F9F9] !text-xs !font-medium">
+              {" "}
+              {index + 1}
+            </span>
+          ))
+        ) : (
+          <span className="grid size-7 place-items-center rounded-full bg-[#F9F9F9] !text-xs !font-medium">
+            {" "}
+            {index + 1}
+          </span>
+        )}
 
         <div className="flex items-center gap-2">
           <div className="bg-alternative grid size-7 place-items-center rounded-full text-xs font-bold text-white">

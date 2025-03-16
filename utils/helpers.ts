@@ -77,7 +77,7 @@ export const handleError = (message: string) => {
 };
 
 export const getAmount = (val: string) => {
-  return parseInt(val) / 1000000;
+  return Number(val) / 1000000;
 };
 
 export const converTimestamp = (seconds: number, nanoseconds: number) => {

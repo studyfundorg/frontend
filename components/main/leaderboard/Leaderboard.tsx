@@ -63,7 +63,9 @@ const Leaderboard = () => {
           </figure>
           <article>
             <p>{formatAddress(third?.address ?? "")}</p>
-            <h4 className="!font-bold">{getAmount(third?.totalDonated)}</h4>
+            <h4 className="!font-bold">
+              {getAmount(third?.totalDonated ?? 0)}
+            </h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
               <small className="!text-[10px]"> USDT</small>
@@ -76,7 +78,9 @@ const Leaderboard = () => {
           </figure>
           <article>
             <p>{formatAddress(first?.address ?? "")}</p>
-            <h4 className="!font-bold">{getAmount(first?.totalDonated)}</h4>
+            <h4 className="!font-bold">
+              {getAmount(first?.totalDonated ?? 0)}
+            </h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
               <small className="!text-[10px]"> USDT</small>
@@ -89,7 +93,9 @@ const Leaderboard = () => {
           </figure>{" "}
           <article>
             <p> {formatAddress(second?.address ?? "")}</p>
-            <h4 className="!font-bold">{getAmount(second?.totalDonated)}</h4>
+            <h4 className="!font-bold">
+              {getAmount(second?.totalDonated ?? 0)}
+            </h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
               <small className="!text-[10px]"> USDT</small>
@@ -108,10 +114,9 @@ const Leaderboard = () => {
         </div>
       </article>
       <ul className="divide-Line space-y-3 divide-y">
-        {rest?.map(({ donationCount, totalDonated, address }, idx) => (
+        {rest?.map(({ totalDonated, address }, idx) => (
           <li key={idx} className="pb-3">
             <RaffleLeaders
-              donationCount={donationCount}
               totalDonated={getAmount(totalDonated)}
               address={address}
               index={idx + 3}

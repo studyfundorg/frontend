@@ -6,6 +6,7 @@ import { faqData, howData } from "@/utils/constant";
 import Accordion from "@/components/main/faqElements/Accordion";
 import DonationCountDown from "@/components/main/DonationCountDown";
 import WhyStudy from "@/components/main/WhyStudy";
+import HomeLeaderboard from "@/components/main/leaderboard/HomeLeaderboard";
 
 export default function Home() {
   return (
@@ -139,12 +140,14 @@ export default function Home() {
           </p>
         </article>
 
-        <figure className="hidden lg:block">
+        {/* <figure className="hidden lg:block">
           <Image src={allImages.table} alt="" className="!w-full" />
         </figure>
         <figure className="block lg:hidden">
           <Image src={allImages.tableM} alt="" />
-        </figure>
+        </figure> */}
+
+        <HomeLeaderboard />
       </section>
 
       <WhyStudy />
