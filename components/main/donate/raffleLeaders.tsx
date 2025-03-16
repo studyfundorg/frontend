@@ -1,5 +1,5 @@
 import { USDTIcon } from "@/public/svgs/svgs";
-import { formatNumInThousands } from "@/utils/helpers";
+import { formatAddress, formatNumInThousands } from "@/utils/helpers";
 import React from "react";
 
 const RaffleLeaders = ({
@@ -26,7 +26,7 @@ const RaffleLeaders = ({
           <div className="bg-alternative grid size-7 place-items-center rounded-full text-xs font-bold text-white">
             {address?.slice(0, 1)}
           </div>
-          <h5 className="text-sm font-medium">{address?.slice(0, 8)} </h5>
+          <h5 className="text-sm font-medium">{formatAddress(address)} </h5>
           {/* <h5 className="text-sm font-medium">{donationCount} </h5> */}
         </div>
       </div>

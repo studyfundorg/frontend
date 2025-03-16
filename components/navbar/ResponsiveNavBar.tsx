@@ -52,7 +52,7 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
                 className="pry-btn w-full"
                 type="button"
               >
-                Join studyfund now
+                Donate now
               </Button>
             )}
           </div>

@@ -9,6 +9,7 @@ import { collection, DocumentData } from "firebase/firestore";
 import { db } from "@/firebase";
 import TableLoading from "@/components/ui/skeleton/tableLoading";
 import EmptyState from "@/components/ui/EmptyState";
+import { formatAddress, getAmount } from "@/utils/helpers";
 
 // const leaders = [
 //   { rank: "silverfrog195", value: 2250 },
@@ -50,6 +51,9 @@ const Leaderboard = () => {
       />
     );
 
+  const [first, second, third, ...rest] = data;
+  console.log(data);
+
   return (
     <section className="card flex-1 p-2 md:p-5">
       <ul className="grid grid-cols-3 justify-center gap-4">
@@ -58,8 +62,8 @@ const Leaderboard = () => {
             <Image src={allImages.bronze} alt="" />
           </figure>
           <article>
-            <p>whiteswan</p>
-            <h4 className="!font-bold">253</h4>
+            <p>{formatAddress(third?.address ?? "")}</p>
+            <h4 className="!font-bold">{getAmount(third?.totalDonated)}</h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
               <small className="!text-[10px]"> USDT</small>
@@ -71,8 +75,8 @@ const Leaderboard = () => {
             <Image src={allImages.gold} alt="" />
           </figure>
           <article>
-            <p>tinyleopar</p>
-            <h4 className="!font-bold">10,000</h4>
+            <p>{formatAddress(first?.address ?? "")}</p>
+            <h4 className="!font-bold">{getAmount(first?.totalDonated)}</h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
               <small className="!text-[10px]"> USDT</small>
@@ -84,8 +88,8 @@ const Leaderboard = () => {
             <Image src={allImages.silver} alt="" />
           </figure>{" "}
           <article>
-            <p>crazyfish</p>
-            <h4 className="!font-bold">420</h4>
+            <p> {formatAddress(second?.address ?? "")}</p>
+            <h4 className="!font-bold">{getAmount(second?.totalDonated)}</h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
               <small className="!text-[10px]"> USDT</small>
@@ -97,20 +101,20 @@ const Leaderboard = () => {
       <article className="mt-10 mb-6 flex justify-between">
         <div className="flex gap-5">
           <p className="text-xs !font-semibold">Rank</p>
-          <p className="text-xs !font-semibold">Players</p>
+          <p className="text-xs !font-semibold">Donor</p>
         </div>
         <div>
           <p className="text-xs !font-semibold">Amount</p>
         </div>
       </article>
       <ul className="divide-Line space-y-3 divide-y">
-        {data?.map(({ donationCount, totalDonated, address }, idx) => (
+        {rest?.map(({ donationCount, totalDonated, address }, idx) => (
           <li key={idx} className="pb-3">
             <RaffleLeaders
               donationCount={donationCount}
-              totalDonated={totalDonated}
+              totalDonated={getAmount(totalDonated)}
               address={address}
-              index={idx + 4}
+              index={idx + 3}
             />
           </li>
         ))}

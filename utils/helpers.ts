@@ -75,3 +75,19 @@ export const handleError = (message: string) => {
     description: message,
   });
 };
+
+export const getAmount = (val: string) => {
+  return parseInt(val) / 1000000;
+};
+
+export const converTimestamp = (seconds: number, nanoseconds: number) => {
+  const date = new Date(seconds * 1000 + nanoseconds / 1000000).toDateString();
+  const time = new Date(
+    seconds * 1000 + nanoseconds / 1000000,
+  ).toLocaleTimeString();
+  return { date, time };
+};
+
+export const formatAddress = (address: string) => {
+  return `${address.slice(0, 4)}.....${address.slice(-3)}`;
+};
