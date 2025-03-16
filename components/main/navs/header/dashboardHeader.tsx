@@ -14,7 +14,7 @@ const Dashboardheader = () => {
         <section
           className={`${styles.headerNavContainer} container flex items-center justify-between gap-5`}
         >
-          <BrandLogo path="/dashboard" />
+          <BrandLogo />
 
           <DashboardResponsiveHeader />
         </section>

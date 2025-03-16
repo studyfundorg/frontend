@@ -7,6 +7,7 @@ import { HistoryIcon, LeaderIcon, ReferralIcon } from "@/public/svgs/svgs";
 import NavbarLinks from "./navbarLinks";
 import { FaPlus } from "react-icons/fa6";
 import { useWallets } from "@privy-io/react-auth";
+import { formatAddress } from "@/utils/helpers";
 
 export const dashboardRoutes = [
   {
@@ -31,10 +32,6 @@ const DashboardResponsiveHeader = () => {
 
   const { wallets } = useWallets();
   const wallet = useMemo(() => wallets[0], [wallets]);
-
-  const formatAddress = (address: string) => {
-    return `${address.slice(0, 4)}.....${address.slice(-3)}`;
-  };
 
   return (
     <nav className="flex flex-1 justify-end">

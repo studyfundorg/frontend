@@ -538,3 +538,29 @@ export const ThankYouIcon = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
+
+export const NoCustomerIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={55}
+    height={54}
+    fill="none"
+    {...props}
+  >
+    <rect width={54} height={54} x={0.5} fill="#F2F4F7" rx={27} />
+    <circle cx={28} cy={21} r={4} stroke="#475467" strokeWidth={1.5} />
+    <path
+      stroke="#475467"
+      strokeLinecap="round"
+      strokeWidth={1.5}
+      d="M34 24c1.657 0 3-1.12 3-2.5S35.657 19 34 19M22 24c-1.657 0-3-1.12-3-2.5s1.343-2.5 3-2.5"
+    />
+    <ellipse cx={28} cy={32} stroke="#475467" strokeWidth={1.5} rx={6} ry={4} />
+    <path
+      stroke="#475467"
+      strokeLinecap="round"
+      strokeWidth={1.5}
+      d="M36 34c1.754-.385 3-1.359 3-2.5s-1.246-2.115-3-2.5M20 34c-1.754-.385-3-1.359-3-2.5s1.246-2.115 3-2.5"
+    />
+  </svg>
+);

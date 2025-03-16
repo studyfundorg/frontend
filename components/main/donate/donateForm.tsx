@@ -41,7 +41,7 @@ const DonateForm = ({
   return (
     <form className="card px-5 py-7">
       <ul className="space-y-5">
-        <li className="text-xl font-semibold">
+        {/* <li className="text-xl font-semibold">
           1. How would you like to donate?
           <article className="mt-4 flex flex-col items-end gap-4">
             <div className="card flex w-full items-center gap-2 p-2 md:w-11/12">
@@ -73,10 +73,10 @@ const DonateForm = ({
               <small>(Please sustain our mission long term 🙏🏼)</small>
             </div>
           </article>
-        </li>
+        </li> */}
 
         <li className="text-xl font-semibold">
-          2. Please select an amount to donate
+          Please select an amount to donate
           <div className="flex gap-2 p-2">
             <input
               name="noRaffle"

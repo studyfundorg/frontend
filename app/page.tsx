@@ -6,6 +6,7 @@ import { faqData, howData } from "@/utils/constant";
 import Accordion from "@/components/main/faqElements/Accordion";
 import DonationCountDown from "@/components/main/DonationCountDown";
 import WhyStudy from "@/components/main/WhyStudy";
+import HomeLeaderboard from "@/components/main/leaderboard/HomeLeaderboard";
 
 export default function Home() {
   return (
@@ -34,7 +35,9 @@ export default function Home() {
           data-aos-duration="1000"
           className="mx-auto mb-7 flex w-11/12 max-w-[400px] flex-col items-center justify-between"
         >
-          <Button className="pry-btn w-fit">Join the waitlist</Button>
+          <Button link href="/signup" className="pry-btn w-fit">
+            Donate Now
+          </Button>
         </article>
 
         <article className="relative ml-2 grid grid-cols-2 gap-2 lg:hidden">
@@ -114,7 +117,9 @@ export default function Home() {
         </article>
 
         <article className="mx-auto mt-8 flex w-11/12 max-w-[400px] flex-col items-center justify-between">
-          <Button className="pry-btn w-fit">Make an Impact. Join now</Button>
+          <Button link href="/signup" className="pry-btn w-fit">
+            Make an Impact. Donate now
+          </Button>
         </article>
       </section>
 
@@ -135,12 +140,14 @@ export default function Home() {
           </p>
         </article>
 
-        <figure className="hidden lg:block">
+        {/* <figure className="hidden lg:block">
           <Image src={allImages.table} alt="" className="!w-full" />
         </figure>
         <figure className="block lg:hidden">
           <Image src={allImages.tableM} alt="" />
-        </figure>
+        </figure> */}
+
+        <HomeLeaderboard />
       </section>
 
       <WhyStudy />
