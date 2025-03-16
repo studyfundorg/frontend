@@ -1,31 +1,54 @@
 "use client";
 import { allImages } from "@/public/images/images";
-import { USDTIcon } from "@/public/svgs/svgs";
+import { NoCustomerIcon, USDTIcon } from "@/public/svgs/svgs";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RaffleLeaders from "../donate/raffleLeaders";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection } from "firebase/firestore";
+import { collection, DocumentData } from "firebase/firestore";
 import { db } from "@/firebase";
+import TableLoading from "@/components/ui/skeleton/tableLoading";
+import EmptyState from "@/components/ui/EmptyState";
 
-const leaders = [
-  { rank: "silverfrog195", value: 2250 },
-  { rank: "silverfrog195", value: 1250 },
-  { rank: "silverfrog195", value: 750 },
-  { rank: "silverfrog195", value: 500 },
-  { rank: "silverfrog195", value: 250 },
-  { rank: "silverfrog195", value: 250 },
-];
+// const leaders = [
+//   { rank: "silverfrog195", value: 2250 },
+//   { rank: "silverfrog195", value: 1250 },
+//   { rank: "silverfrog195", value: 750 },
+//   { rank: "silverfrog195", value: 500 },
+//   { rank: "silverfrog195", value: 250 },
+//   { rank: "silverfrog195", value: 250 },
+// ];
 
 const Leaderboard = () => {
   const [value, loading, error] = useCollection(
-    collection(db, "/donationLeaderboard"),
+    collection(db, "donationLeaderboard"),
   );
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  const [data, setData] = useState<DocumentData[]>([]);
 
-  console.log(value);
+  useEffect(() => {
+    if (value) {
+      const newData = value.docs.map((doc) => doc.data());
+      setData(newData);
+    }
+  }, [value]);
+
+  if (loading) {
+    return (
+      <section className="card flex-1 px-3 py-5 lg:px-10">
+        <TableLoading />
+      </section>
+    );
+  }
+
+  if (error)
+    return (
+      <EmptyState
+        icon={<NoCustomerIcon />}
+        title="No data"
+        subtitle={error?.message}
+      />
+    );
 
   return (
     <section className="card flex-1 p-2 md:p-5">
@@ -81,9 +104,14 @@ const Leaderboard = () => {
         </div>
       </article>
       <ul className="divide-Line space-y-3 divide-y">
-        {leaders.map((item, idx) => (
+        {data?.map(({ donationCount, totalDonated, address }, idx) => (
           <li key={idx} className="pb-3">
-            <RaffleLeaders item={item} index={idx + 4} />
+            <RaffleLeaders
+              donationCount={donationCount}
+              totalDonated={totalDonated}
+              address={address}
+              index={idx + 4}
+            />
           </li>
         ))}
       </ul>
