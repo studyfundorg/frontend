@@ -10,9 +10,7 @@ import EmptyState from "@/components/ui/EmptyState";
 import { getAmount } from "@/utils/helpers";
 
 const HomeLeaderboard = () => {
-  const [value, loading, error] = useCollection(
-    collection(db, "donationLeaderboard"),
-  );
+  const [value, loading, error] = useCollection(collection(db, "donors"));
 
   const [data, setData] = useState<DocumentData[]>([]);
 
@@ -40,6 +38,14 @@ const HomeLeaderboard = () => {
       />
     );
 
+  const sortedData = data?.sort((a, b) => {
+    if (b.total_donated !== a.total_donated) {
+      return b.total_donated - a.total_donated;
+    } else {
+      return a.entries - b.entries;
+    }
+  });
+
   return (
     <section className="card mx-auto w-[97%] p-2 md:p-5">
       <article className="mt-10 mb-6 flex justify-between">
@@ -52,11 +58,11 @@ const HomeLeaderboard = () => {
         </div>
       </article>
       <ul className="divide-Line space-y-3 divide-y">
-        {data?.map(({ totalDonated, address }, idx) => (
+        {sortedData?.map(({ total_donated, address }, idx) => (
           <li key={idx} className="pb-3">
             <RaffleLeaders
               home
-              totalDonated={getAmount(totalDonated)}
+              totalDonated={getAmount(total_donated)}
               address={address}
               index={idx}
             />
