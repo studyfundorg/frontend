@@ -21,9 +21,7 @@ import { formatAddress, getAmount } from "@/utils/helpers";
 // ];
 
 const Leaderboard = () => {
-  const [value, loading, error] = useCollection(
-    collection(db, "donationLeaderboard"),
-  );
+  const [value, loading, error] = useCollection(collection(db, "donors"));
 
   const [data, setData] = useState<DocumentData[]>([]);
 
@@ -52,7 +50,6 @@ const Leaderboard = () => {
     );
 
   const [first, second, third, ...rest] = data;
-  console.log(data);
 
   return (
     <section className="card flex-1 p-2 md:p-5">
@@ -64,7 +61,7 @@ const Leaderboard = () => {
           <article>
             <p>{formatAddress(third?.address ?? "")}</p>
             <h4 className="!font-bold">
-              {getAmount(third?.totalDonated ?? 0)}
+              {getAmount(third?.total_donated ?? 0)}
             </h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
@@ -79,7 +76,7 @@ const Leaderboard = () => {
           <article>
             <p>{formatAddress(first?.address ?? "")}</p>
             <h4 className="!font-bold">
-              {getAmount(first?.totalDonated ?? 0)}
+              {getAmount(first?.total_donated ?? 0)}
             </h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
@@ -94,7 +91,7 @@ const Leaderboard = () => {
           <article>
             <p> {formatAddress(second?.address ?? "")}</p>
             <h4 className="!font-bold">
-              {getAmount(second?.totalDonated ?? 0)}
+              {getAmount(second?.total_donated ?? 0)}
             </h4>
             <div className="flex items-center justify-center gap-1">
               <USDTIcon width={14} height={14} />
@@ -114,10 +111,10 @@ const Leaderboard = () => {
         </div>
       </article>
       <ul className="divide-Line space-y-3 divide-y">
-        {rest?.map(({ totalDonated, address }, idx) => (
+        {rest?.map(({ total_donated, address }, idx) => (
           <li key={idx} className="pb-3">
             <RaffleLeaders
-              totalDonated={getAmount(totalDonated)}
+              totalDonated={getAmount(total_donated)}
               address={address}
               index={idx + 3}
             />
