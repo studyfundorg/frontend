@@ -6,7 +6,7 @@ import { collection, DocumentData, orderBy, query, where } from "firebase/firest
 import { db } from "@/firebase";
 import TableLoading from "@/components/ui/skeleton/tableLoading";
 import EmptyState from "@/components/ui/EmptyState";
-import { converTimestamp, getAmount } from "@/utils/helpers";
+import { getAmount } from "@/utils/helpers";
 
 const HistoryList = () => {
   const [value, loading, error] = useCollection(
