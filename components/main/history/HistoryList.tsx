@@ -2,7 +2,7 @@
 import { NoCustomerIcon, USDTIcon } from "@/public/svgs/svgs";
 import React, { useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection, DocumentData } from "firebase/firestore";
+import { collection, DocumentData, orderBy, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
 import TableLoading from "@/components/ui/skeleton/tableLoading";
 import EmptyState from "@/components/ui/EmptyState";
@@ -10,7 +10,11 @@ import { converTimestamp, getAmount } from "@/utils/helpers";
 
 const HistoryList = () => {
   const [value, loading, error] = useCollection(
-    collection(db, "donor_history"),
+    query(
+      collection(db, "histories"),
+      where("type", "in", ["Donation", "Reward"]),
+      orderBy("timestamp", "desc")
+    ),
   );
 
   const [data, setData] = useState<DocumentData[]>([]);
@@ -52,26 +56,23 @@ const HistoryList = () => {
         </div>
       </article>
       <ul className="divide-Line space-y-3 divide-y">
-        {data.map(({ amount, timestamp }, idx) => (
+        {data.map(({ amount, timestamp, type }, idx) => {
+          console.log(type, timestamp, amount, "history");
+          const date = new Date(+timestamp * 1000);
+          return (
           <li key={idx} className="flex justify-between pb-3">
             <article className="flex flex-1 gap-1">
               <div className="w-full md:w-[25%] lg:w-[30%] xl:w-[25%]">
                 <p className="!text-sm">
-                  {
-                    converTimestamp(timestamp?.seconds, timestamp?.nanoseconds)
-                      .date
-                  }
+                  {date.toDateString()}
                 </p>
                 <small className="!text-xs text-[#8E9093]">
                   {" "}
-                  {
-                    converTimestamp(timestamp?.seconds, timestamp?.nanoseconds)
-                      .time
-                  }
+                  {date.toLocaleTimeString()}
                 </small>
               </div>
               <div className="hidden items-center gap-1 md:flex">
-                <h4 className="!text-lg">{getAmount(amount)}</h4>
+                <h4 className="!text-lg">{type === "Donation" ? getAmount(amount) : "0"}</h4>
                 <div className="flex items-center justify-center gap-1">
                   <USDTIcon width={14} height={14} />
                   <small className="!text-[10px]"> USDT</small>
@@ -83,7 +84,7 @@ const HistoryList = () => {
               <div className="flex items-center gap-1 md:hidden">
                 <small className="!text-xs text-[#6C6D6F]">Donated:</small>
                 <article className="flex items-center gap-1">
-                  <h4 className="!text-lg">{getAmount(amount)}</h4>
+                  <h4 className="!text-lg">{type === "Donation" ? getAmount(amount) : "0"}</h4>
                   <div className="flex items-center justify-center gap-1">
                     <USDTIcon width={14} height={14} />
                     <small className="!text-[10px]"> USDT</small>
@@ -96,7 +97,7 @@ const HistoryList = () => {
                   Reward:
                 </small>
                 <article className="flex items-center gap-1">
-                  <h4 className="!text-lg">{0}</h4>
+                  <h4 className="!text-lg">{type === "Reward" ? getAmount(amount) : "0"}</h4>
                   <div className="flex items-center justify-center gap-1">
                     <USDTIcon width={14} height={14} />
                     <small className="!text-[10px]"> USDT</small>
@@ -105,7 +106,7 @@ const HistoryList = () => {
               </div>
             </article>
           </li>
-        ))}
+        )})}
       </ul>
     </section>
   );
