@@ -5,23 +5,19 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import RaffleLeaders from "../donate/raffleLeaders";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection, DocumentData } from "firebase/firestore";
+import { collection, DocumentData, query, orderBy } from "firebase/firestore";
 import { db } from "@/firebase";
 import TableLoading from "@/components/ui/skeleton/tableLoading";
 import EmptyState from "@/components/ui/EmptyState";
 import { formatAddress, getAmount } from "@/utils/helpers";
 
-// const leaders = [
-//   { rank: "silverfrog195", value: 2250 },
-//   { rank: "silverfrog195", value: 1250 },
-//   { rank: "silverfrog195", value: 750 },
-//   { rank: "silverfrog195", value: 500 },
-//   { rank: "silverfrog195", value: 250 },
-//   { rank: "silverfrog195", value: 250 },
-// ];
-
 const Leaderboard = () => {
-  const [value, loading, error] = useCollection(collection(db, "donors"));
+  const [value, loading, error] = useCollection(
+    query(
+      collection(db, "donors"),
+      orderBy("total_donated", "desc")
+    )
+  );
 
   const [data, setData] = useState<DocumentData[]>([]);
 
