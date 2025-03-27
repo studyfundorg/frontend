@@ -1157,3 +1157,11 @@ export interface StudyFund extends BaseContract {
     >;
   };
 }
+
+export interface Raffle {
+  startTime: bigint;
+  endTime: bigint;
+  prizePool: bigint;
+  donations: bigint;
+  completed: boolean;
+}

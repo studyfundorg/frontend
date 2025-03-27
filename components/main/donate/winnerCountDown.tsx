@@ -1,13 +1,34 @@
 "use client";
 
-import { useGlobalHooks } from "@/hooks/globalHooks";
-import React from "react";
+import { useBlockchain } from "@/context/BlockchainProvider";
+import React, { useEffect, useMemo, useState } from "react";
 
 const WinnerCountDown = () => {
-  const endDate = new Date(Date.now() + 6 * 24 * 60 * 60 * 1000);
+  const { currentRaffle } = useBlockchain();
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-  const { timeLeft } = useGlobalHooks(endDate.toString());
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
 
+    return () => clearInterval(timer);
+  }, []);
+  
+  const timeLeft = useMemo(() => {
+    const endDate = new Date(Number(currentRaffle?.endTime) * 1000);
+    const diff = endDate.getTime() - currentTime.getTime();
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    return {
+      days,
+      hours,
+      mins,
+      secs,
+    };
+  }, [currentRaffle, currentTime]);
   return (
     <section className="flex flex-wrap justify-between gap-4">
       <article className="flex flex-col items-center">
@@ -59,7 +80,7 @@ export const TimerCard = ({ time }: { time: number }) => {
       <h4
         className={` ${time === 0 ? "text-red-500" : "!text-white"} !font-semibold`}
       >
-        {time || 0}
+        {String(time || 0).padStart(2, '0')}
       </h4>
     </hgroup>
   );

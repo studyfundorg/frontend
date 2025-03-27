@@ -1,6 +1,7 @@
 "use client";
 
 import { UserStudyFund } from "@/libs/UserStudyFund";
+import { Raffle } from "@/types/StudyFund";
 import { handleError } from "@/utils/helpers";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { TransactionReceipt } from "ethers";
@@ -11,6 +12,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 // Define the type for context
 type BlockchainContextType = {
   wallet?: { address: string; usdtBalance: string };
+  currentRaffle?: Raffle | null;
   donate: (amount: number) => Promise<TransactionReceipt | null>;
   requestTestTokens: (amount: number) => Promise<boolean>;
   getUSDTBalance: () => Promise<string>;
@@ -23,11 +25,20 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
   const { wallets } = useWallets();
   const [usdtBalance, setUsdtBalance] = useState<string>("0");
   const studyFundRef = useRef<UserStudyFund | null>(null);
+  const [currentRaffle, setCurrentRaffle] = useState<Raffle | null>(null);
 
   const wallet = useMemo(
     () => wallets.find((wallet) => wallet.walletClientType === "privy"),
     [wallets],
   );
+
+  useEffect(() => {
+    studyFundRef.current?.getCurrentRaffle()?.then((raffle) => {
+      setCurrentRaffle(raffle);
+    }).catch((error) => {
+      console.error("Failed to get current raffle:", error);
+    });
+  }, [studyFundRef.current]);
 
   useEffect(() => {
     // Connect wallet when authenticated
@@ -48,7 +59,6 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
           });
 
           const newSigner = await provider.getSigner();
-          console.log("newSigner", newSigner, provider);
 
           // Connect the signer to StudyFund
           await studyFundRef.current?.connect(newSigner);
@@ -147,6 +157,7 @@ export const BlockchainProvider = ({ children }: { children: ReactNode }) => {
   }, [getUSDTBalance]);
 
   const blockchain: BlockchainContextType = {
+    currentRaffle,
     wallet: wallet ? { address: wallet.address, usdtBalance } : undefined,
     donate,
     requestTestTokens,

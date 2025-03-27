@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { StudyFundBase } from "./StudyFund";
-import { StudyFund as StudyFundContract } from "@/types/StudyFund";
+import { StudyFund as StudyFundContract, Raffle } from "@/types/StudyFund";
 
 export interface UserStudyFundConfig {
   provider: ethers.Provider; // Web3Provider from MetaMask/Trust Wallet
@@ -268,5 +268,27 @@ export class UserStudyFund extends StudyFundBase {
     const address = await this.signer.getAddress();
     const balance = await this.usdtContract.balanceOf(address);
     return ethers.formatUnits(balance, 6); // USDT has 6 decimals
+  }
+
+  async getCurrentRaffle(): Promise<Raffle | null> {
+    const raffleId = await this.contract.currentRaffleId();
+    if (raffleId === BigInt(0)) {
+      return null;
+    }
+    const raffle = await this.contract.raffles(raffleId);
+    let pool = raffle?.[2];
+    if (pool === BigInt(0) && raffle?.[3] > BigInt(7000 * 1e6)) {
+      pool = raffle?.[3] * BigInt(35) / BigInt(100);
+    } else if (pool === BigInt(0) && raffle?.[3] <= BigInt(5000 * 1e6)) {
+      pool = BigInt(5000 * 1e6);
+    }
+
+    return {
+      startTime: raffle?.[0],
+      endTime: raffle?.[1],
+      prizePool: pool,
+      donations: raffle?.[3],
+      completed: raffle?.[4] as unknown as boolean,
+    };
   }
 }
