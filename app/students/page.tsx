@@ -62,7 +62,7 @@ export default function page() {
             <p className="text-lg text-[#545659]">
               No Stress. No Bias. Just Fair Funding.
             </p>
-            <Button className="pry-btn mt-7 w-fit">Signup Now</Button>
+            <Button className="pry-btn mt-7 w-fit">Apply today</Button>
           </article>
         </article>
       </section>

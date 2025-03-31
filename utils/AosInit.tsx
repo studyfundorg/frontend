@@ -16,7 +16,7 @@ export default function AOSAnimation({
     AOS.init();
   }, [AOS]);
 
-  const pathNames = ["/for-students"];
+  const pathNames = ["/students"];
   const normalizedPath = path.replace(/\/$/, "").toLowerCase();
   const showNav = useMemo(
     () => pathNames.includes(normalizedPath) || path === "/",

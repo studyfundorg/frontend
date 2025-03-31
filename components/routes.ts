@@ -15,7 +15,7 @@ export const navbarRoutes = (student?: boolean) => {
     },
     {
       name: student ? "For Donors" : "For students",
-      path: student ? "/" : "/for-students",
+      path: student ? "/" : "/students",
     },
   ];
 };
