@@ -33,22 +33,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const opts = {
-  //   clientId: "<Does_Not_Matter_For_Sandbox_mode>",
-  //   redirectUri: "http://localhost:3000/redirect",
-  //   referralCode: "PARTNER6",
-  // };
+  const opts = {
+    clientId: "<Does_Not_Matter_For_Sandbox_mode>",
+    redirectUri: "http://localhost:3000/redirect",
+    referralCode: "PARTNER6",
+  };
 
   return (
     <html lang="en">
       <body className={redditSans?.variable}>
         <NextTopLoader showSpinner={false} />
 
-        <Providers>
-          {/* <OCConnectWrapper opts={opts} sandboxMode={true}> */}
+        {/* <Providers> */}
+        <OCConnectWrapper opts={opts} sandboxMode={false}>
           <AOSAnimation>{children}</AOSAnimation>
-          {/* </OCConnectWrapper> */}
-        </Providers>
+        </OCConnectWrapper>
+        {/* </Providers> */}
         <Toaster />
       </body>
     </html>
