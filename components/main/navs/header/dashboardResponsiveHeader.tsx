@@ -8,26 +8,30 @@ import NavbarLinks from "./navbarLinks";
 import { FaPlus } from "react-icons/fa6";
 import { useWallets } from "@privy-io/react-auth";
 import { formatAddress } from "@/utils/helpers";
-
-export const dashboardRoutes = [
-  {
-    name: "Referral",
-    path: "/referral",
-    icon: <ReferralIcon />,
-  },
-  {
-    name: "Leaderboard",
-    path: "/leaderboard",
-    icon: <LeaderIcon />,
-  },
-  {
-    name: "History",
-    path: "/history",
-    icon: <HistoryIcon />,
-  },
-];
+import { usePathname } from "next/navigation";
 
 const DashboardResponsiveHeader = () => {
+  const pathname = usePathname();
+
+  const isStudentsPage = pathname.includes("/students");
+
+  const dashboardRoutes = [
+    {
+      name: "Referral",
+      path: "/referral",
+      icon: <ReferralIcon />,
+    },
+    {
+      name: "Leaderboard",
+      path: "/leaderboard",
+      icon: <LeaderIcon />,
+    },
+    {
+      name: "History",
+      path: isStudentsPage ? "/students/history" : "/history",
+      icon: <HistoryIcon />,
+    },
+  ];
   const { handleToggle } = useGlobalHooks();
 
   const { wallets } = useWallets();

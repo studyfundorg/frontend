@@ -12,7 +12,7 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
 
   const path = usePathname();
 
-  const isForStudent = path.includes("/for-students");
+  const isForStudent = path.includes("/students");
 
   return (
     <nav className="flex flex-1 justify-end">
@@ -39,11 +39,11 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
             {isForStudent ? (
               <Button
                 link
-                href="/signup"
+                href="/students/signup"
                 className="pry-btn w-full"
                 type="button"
               >
-                Apply today
+                Signup Now
               </Button>
             ) : (
               <Button

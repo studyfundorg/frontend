@@ -1,6 +1,6 @@
 import BrandLogo from "@/components/BrandLogo";
+import LoginWithOcid from "@/components/main/auth/loginWithOcid";
 import { allImages } from "@/public/images/images";
-import LoginWithPrivy from "@/components/main/auth/loginWithPrivy";
 import Image from "next/image";
 
 import React from "react";
@@ -28,7 +28,7 @@ export default function page() {
         <article className="">
           <h1>Every student deserves a future</h1>
 
-          <LoginWithPrivy />
+          <LoginWithOcid />
 
           <p className="text-Grey3 !mx-auto max-w-sm">
             By using StudyFund, you agree to our{" "}

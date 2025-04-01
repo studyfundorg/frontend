@@ -32,6 +32,8 @@
   --color-Grey6: #f2f4f7;
   --color-Grey7: #868a90;
   --color-Grey8: #9fa1a5;
+  --color-Grey9: #2c2d2e;
+  --color-Grey10: #787a7e;
   --color-Line: #e4e7ec;
   --shadow-3xl: 0px 4px 12px 0px #0000000d;
   --shadow-4xl: 0px 0px 28px 0px #0000001c;
@@ -256,14 +258,14 @@ small {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--color-ebonyclay);
-  background-color: #fff;
+  background-color: transparent;
   background-clip: padding-box;
   border: 1px solid var(--color-Line);
-  border-radius: 123px;
+  border-radius: 4px;
   transition:
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
-  padding-left: 2em;
+  /* padding-left: 2em; */
 }
 
 input::placeholder {

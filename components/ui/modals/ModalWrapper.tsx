@@ -36,7 +36,7 @@ const ModalWrapper = ({
         open={openModals[id]}
         onOpenChange={(isOpen) => !isOpen && modalAction(id)}
       >
-        <DialogContent className="space-y-6 bg-white sm:max-w-[402px]">
+        <DialogContent className="max-h-[90vh] space-y-6 overflow-y-auto bg-white sm:max-w-[402px]">
           {icon}
 
           <DialogHeader className={headerClass}>
