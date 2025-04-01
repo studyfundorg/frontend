@@ -39,9 +39,11 @@ import cap from "@/public/images/cap.png";
 import pen from "@/public/images/pen.png";
 import clock from "@/public/images/clock.png";
 import book from "@/public/images/book.png";
+import students from "@/public/images/happy-student-girl.png";
 
 export const allImages = {
   walletIcon,
+  students,
   footerBannerM,
   brandLogo,
   studyFund,

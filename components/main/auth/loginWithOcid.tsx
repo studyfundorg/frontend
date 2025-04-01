@@ -24,6 +24,8 @@ const LoginWithOcid = () => {
         className="pry-btn mt-10 mb-3 w-full gap-4"
         // disabled={disableLogin}
         // onClick={handleLogin}
+        link
+        href="/students/ocid"
       >
         {" "}
         <Image src={allImages.edu} alt="Privy Logo" className="w-4" /> Continue

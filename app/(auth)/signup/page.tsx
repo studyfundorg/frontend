@@ -1,6 +1,6 @@
 import BrandLogo from "@/components/BrandLogo";
-import LoginWithPrivy from "@/components/main/auth/loginWithPrivy";
 import { allImages } from "@/public/images/images";
+import LoginWithPrivy from "@/components/main/auth/loginWithPrivy";
 import Image from "next/image";
 
 import React from "react";

@@ -10,31 +10,28 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const dashboardRoutes = [
-  {
-    name: "Home",
-    path: "/dashboard",
-    icon: <HomeIcon />,
-  },
-  {
-    name: "Referral",
-    path: "/referral",
-    icon: <ReferralIcon width={18} height={18} />,
-  },
-  {
-    name: "Leaderboard",
-    path: "/leaderboard",
-    icon: <LeaderIcon width={18} height={18} />,
-  },
-  {
-    name: "History",
-    path: "/history",
-    icon: <HistoryIcon width={18} height={18} />,
-  },
-];
-
 const BottomNav = () => {
   const pathName = usePathname();
+
+  const isStudentsPage = pathName.includes("/students");
+
+  const dashboardRoutes = [
+    {
+      name: "Referral",
+      path: "/referral",
+      icon: <ReferralIcon />,
+    },
+    {
+      name: "Leaderboard",
+      path: "/leaderboard",
+      icon: <LeaderIcon />,
+    },
+    {
+      name: "History",
+      path: isStudentsPage ? "/students/history" : "/history",
+      icon: <HistoryIcon />,
+    },
+  ];
 
   return (
     <nav className="shadow-5xl fixed bottom-0 z-50 flex w-full justify-end bg-white p-6 backdrop-blur-2xl lg:hidden">

@@ -39,7 +39,7 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
             {isForStudent ? (
               <Button
                 link
-                href="/students-signup"
+                href="/students/signup"
                 className="pry-btn w-full"
                 type="button"
               >
