@@ -10,10 +10,10 @@ const Warning = ({
 }) => {
   return (
     <article
-      className={`${className} flex gap-2 rounded-2xl bg-[#FFFDEF] px-5 py-3`}
+      className={`${className} flex items-center gap-2 rounded-2xl bg-[#FFFDEF] px-5 py-3`}
     >
       <MdErrorOutline color="#FFB000" size={24} />{" "}
-      <p className="text-start">{title}</p>
+      <p className="text-start !text-sm">{title}</p>
     </article>
   );
 };

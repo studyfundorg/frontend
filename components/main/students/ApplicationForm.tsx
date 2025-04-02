@@ -5,7 +5,6 @@ import FileField from "../../ui/FileField";
 import Warning from "../warning";
 import { UploadIcon } from "@/public/svgs/svgs";
 import Button from "@/components/ui/Button";
-import { useGlobalHooks } from "@/hooks/globalHooks";
 import { handleError, handleSuccess } from "@/utils/helpers";
 import { useRouter } from "next/navigation";
 type FileUploads = {
@@ -62,16 +61,19 @@ export default function ApplicationForm() {
         <h4 className="!text-[22px] !font-bold text-[#090909]">
           Start Application
         </h4>
-        <p className="text-sm text-[#707379]">
+        <p className="!text-sm text-[#707379]">
           Kindly provide all documents to be considered for a scholarship
         </p>
-        <Warning
-          title="Only eligible candidates will be considered."
-          className="!text-sm"
-        />
+        <Warning title="Only eligible candidates will be considered." />
       </article>
 
       <form onSubmit={handleSubmit} className="space-y-3.5">
+        <input
+          type="hidden"
+          name="address"
+          value="0x7A3bC9D8e2F1456789abcdef0123"
+        />
+
         <article className="space-y-0.5">
           <label className="flex gap-1 text-sm text-[#2C2D2E]">
             Upload your transcript

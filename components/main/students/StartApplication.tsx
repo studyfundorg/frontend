@@ -5,7 +5,7 @@ import CheckEligibility from "./CheckEligibility";
 
 const StartApplication = () => {
   return (
-    <aside className="card w-full space-y-8 p-4 md:p-8 lg:w-[60%]">
+    <aside className="card w-full space-y-8 p-4 md:p-8 lg:w-[50%]">
       <article className="!space-y-4 text-center lg:text-left">
         <h4 className="text-center !font-bold text-[#090909]">
           Start Application
@@ -58,7 +58,13 @@ const StartApplication = () => {
 
       <article className="flex flex-col gap-6 sm:flex-row">
         <CheckEligibility />
-        <Button className="pry-btn flex-1">Apply now</Button>
+        <Button
+          className="pry-btn flex-1"
+          link
+          href="/students/start-application/document-upload"
+        >
+          Apply now
+        </Button>
       </article>
     </aside>
   );

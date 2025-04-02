@@ -44,11 +44,11 @@ export default function RootLayout({
       <body className={redditSans?.variable}>
         <NextTopLoader showSpinner={false} />
 
-        {/* <Providers> */}
-        <OCConnectWrapper opts={opts} sandboxMode={false}>
+        <Providers>
+          {/* <OCConnectWrapper opts={opts} sandboxMode={true}> */}
           <AOSAnimation>{children}</AOSAnimation>
-        </OCConnectWrapper>
-        {/* </Providers> */}
+          {/* </OCConnectWrapper> */}
+        </Providers>
         <Toaster />
       </body>
     </html>

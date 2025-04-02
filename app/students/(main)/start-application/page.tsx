@@ -11,8 +11,12 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <main className="min-h-screen w-full bg-white">
-      <figure className="fixed hidden w-full max-w-md lg:block">
-        <Image src={allImages.students} alt="" />
+      <figure className="fixed hidden h-screen w-full max-w-xl lg:block">
+        <Image
+          src={allImages.students}
+          alt=""
+          className="!h-full !w-full object-cover object-right-top"
+        />
       </figure>
       <section className="flex justify-end p-5">
         <StartApplication />
