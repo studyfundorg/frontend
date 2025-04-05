@@ -1,5 +1,5 @@
 "use client";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect } from "react";
 import Button from "@/components/ui/Button";
 import Ocid from "@/components/main/students/Ocid";
 import countries from "@/utils/countries.json";
@@ -7,14 +7,15 @@ import { useRouter } from "next/navigation";
 import { ActionFormStatus } from "@/types/auths";
 import { signUpAction } from "@/libs/actions/auth.action";
 import { handleError, handleSuccess } from "@/utils/helpers";
+import { usePrivy } from "@privy-io/react-auth";
 
-interface SignupFormProps {
-  ocid: string;
-  walletAddress: string;
-}
-
-const SignupForm = ({ ocid, walletAddress }: SignupFormProps) => {
+const SignupForm = () => {
   const { push } = useRouter();
+  const { user } = usePrivy();
+
+  const ocid = user?.id;
+  const walletAddress = user?.wallet?.address;
+  const email = user?.google?.email;
 
   const initialStatus: ActionFormStatus = {
     error: false,
@@ -39,7 +40,7 @@ const SignupForm = ({ ocid, walletAddress }: SignupFormProps) => {
       <h4 className="text-ebonyclay !mb-6 text-center font-semibold">
         Welcome
       </h4>
-      <Ocid ocid={ocid} className="mb-6" />
+      <Ocid ocid={String(ocid?.split(":").at(2))} className="mb-6" />
 
       <form action={formAction} className="space-y-4">
         <input
@@ -110,6 +111,7 @@ const SignupForm = ({ ocid, walletAddress }: SignupFormProps) => {
             name="email"
             placeholder="Enter your email address"
             className="form-controls"
+            defaultValue={email}
             required
           />
         </div>

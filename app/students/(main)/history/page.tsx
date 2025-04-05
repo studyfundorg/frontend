@@ -1,5 +1,3 @@
-import HistoryList from "@/components/main/history/HistoryList";
-import Referral from "@/components/main/referrals/referral";
 import StudentApplication from "@/components/main/students/StudentApplication";
 import Banner from "@/components/ui/Banner";
 import { Metadata } from "next";

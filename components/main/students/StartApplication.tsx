@@ -14,8 +14,9 @@ const StartApplication = () => {
         <Warning title="Only eligible candidates will be considered." />
 
         <p className="text-Grey9 text-base">
-          Struggling with tuition? You're not alone. At StudyFund, we believe no
-          student should abandon their dreams due to financial hardship.
+          Struggling with tuition? You&apos;re not alone. At StudyFund, we
+          believe no student should abandon their dreams due to financial
+          hardship.
         </p>
       </article>
 

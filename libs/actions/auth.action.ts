@@ -4,6 +4,7 @@ import { signUpApi } from "@/services/apis/auth.api";
 import { ActionFormStatus } from "@/types/auths";
 
 export const signUpAction = async (_: ActionFormStatus, body: FormData) => {
+  console.log(body);
   try {
     const rsp = await signUpApi(body);
 
@@ -19,7 +20,7 @@ export const signUpAction = async (_: ActionFormStatus, body: FormData) => {
     return {
       error: false,
       message: rsp?.body?.message || "User logged in successfully",
-      data: rsp?.body?.details,
+      data: rsp?.body,
     };
   } catch (error) {
     console.log(error);
