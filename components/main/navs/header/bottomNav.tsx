@@ -1,12 +1,7 @@
 "use client";
 import React from "react";
 
-import {
-  HistoryIcon,
-  HomeIcon,
-  LeaderIcon,
-  ReferralIcon,
-} from "@/public/svgs/svgs";
+import { HistoryIcon, LeaderIcon, ReferralIcon } from "@/public/svgs/svgs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

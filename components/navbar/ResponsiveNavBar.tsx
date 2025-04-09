@@ -43,7 +43,7 @@ const ResponsiveNavBar = ({ styles }: { styles: any }) => {
                 className="pry-btn w-full"
                 type="button"
               >
-                Signup Now
+                Signin Now
               </Button>
             ) : (
               <Button

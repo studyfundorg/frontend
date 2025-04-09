@@ -6,7 +6,7 @@ import Providers from "@/context/PrivyProvider";
 
 import { redditSans } from "@/fonts";
 import { Toaster } from "@/components/ui/toaster";
-import OCConnectWrapper from "@/utils/OCConnextWrappers";
+// import OCConnectWrapper from "@/utils/OCConnextWrappers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://studyfund.org"),
@@ -33,24 +33,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const opts = {
-    clientId: "<Does_Not_Matter_For_Sandbox_mode>",
-    redirectUri: "http://localhost:3000/redirect",
-    referralCode: "PARTNER6",
-  };
+  // const opts = {
+  //   clientId: "<Does_Not_Matter_For_Sandbox_mode>",
+  //   redirectUri: "http://localhost:3000/redirect",
+  //   referralCode: "PARTNER6",
+  // };
 
   return (
     <html lang="en">
       <body className={redditSans?.variable}>
         <NextTopLoader showSpinner={false} />
 
-        {/* <Providers> */}
-        <OCConnectWrapper opts={opts} sandboxMode={false}>
+        <Providers>
+          {/* <OCConnectWrapper opts={opts} sandboxMode={true}> */}
           <AOSAnimation>{children}</AOSAnimation>
-        </OCConnectWrapper>
-        {/* </Providers> */}
+          {/* </OCConnectWrapper> */}
+        </Providers>
         <Toaster />
       </body>
     </html>
   );
 }
+

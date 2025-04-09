@@ -3,7 +3,10 @@ import Button from "@/components/ui/Button";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import ModalWrapper from "@/components/ui/modals/ModalWrapper";
 import { useModal } from "@/hooks/useModal";
+import { handleError, handleSuccess } from "@/utils/helpers";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { FcCancel } from "react-icons/fc";
 
 interface EligibilityAnswers {
   enrolled: string;
@@ -12,6 +15,7 @@ interface EligibilityAnswers {
 }
 
 const CheckEligibility = () => {
+  const { push } = useRouter();
   const { isOpen, closeModal, openModal } = useModal();
   const [answers, setAnswers] = useState<EligibilityAnswers>({
     enrolled: "",
@@ -50,7 +54,7 @@ const CheckEligibility = () => {
       (answer) => answer !== "",
     );
     if (!isAllAnswered) {
-      alert("Please answer all questions");
+      handleError("Please answer all questions");
       return;
     }
 
@@ -59,9 +63,14 @@ const CheckEligibility = () => {
       (answer) => answer === "yes",
     );
     if (isEligible) {
-      alert("Congratulations! You are eligible for the scholarship.");
+      handleSuccess(
+        "Congratulations! You are eligible for the scholarship.",
+        push,
+        "/students/start-application/document-upload",
+      );
     } else {
-      alert("Sorry, you are not eligible for the scholarship at this time.");
+      closeModal("check-eligibility");
+      openModal("notEligible");
     }
   };
 
@@ -131,16 +140,31 @@ const CheckEligibility = () => {
                 Cancel
               </Button>
             </DialogClose>
-            <Button
-              onClick={handleSubmit}
-              className="pry-btn flex-1"
-              link
-              href="/students/start-application/document-upload"
-            >
+            <Button onClick={handleSubmit} className="pry-btn flex-1">
               Submit
             </Button>
           </DialogFooter>
         </article>
+      </ModalWrapper>
+
+      <ModalWrapper
+        id="notEligible"
+        title="Not Eligible!"
+        titleClass="!mb-2 !text-xl text-center font-semibold text-Grey9"
+        subtitle="Unfortunately, you do not meet the eligibility criteria. You can reapply when you meet the requirements."
+        subtitleClass="text-center text-Grey10"
+        icon={
+          <div className="flex w-full flex-col items-center justify-center text-center">
+            {" "}
+            <FcCancel size={80} color="#D50000" />
+          </div>
+        }
+        openModals={isOpen}
+        modalAction={closeModal}
+      >
+        <Button link href="/" className="pry-btn w-full">
+          Go Home
+        </Button>
       </ModalWrapper>
     </>
   );
